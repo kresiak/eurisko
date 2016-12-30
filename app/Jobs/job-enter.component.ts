@@ -52,4 +52,8 @@ export class JobEnterComponent implements OnInit {
     {
         this.jobForm.reset();        
     }
+
+    descriptionChanged(content) {
+        let x= content
+    }
 }

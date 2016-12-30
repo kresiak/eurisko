@@ -45,6 +45,9 @@ var JobEnterComponent = (function () {
     JobEnterComponent.prototype.reset = function () {
         this.jobForm.reset();
     };
+    JobEnterComponent.prototype.descriptionChanged = function (content) {
+        var x = content;
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Rx_1.Observable)

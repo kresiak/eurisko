@@ -15,7 +15,7 @@ import {JobEnterComponent} from './Jobs/job-enter.component'
 import {UserDetailComponent} from './Users/user-detail.component'
 import {CurrentUserDetailComponentRoutable} from './Users/current-user-detail.routable.component'
 
-
+import {SimpleTinyComponent} from './ui/editor/editor-wysiwyg'
 import {Editor} from './ui/editor/editor'
 import {EditorNumber} from './ui/editor/editor-number'
 import {EditorDate} from './ui/editor/editor-date'
@@ -56,7 +56,7 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
                   CommentComponent, CommentsComponent,
                   JobEnterComponent,
                   UserDetailComponent, CurrentUserDetailComponentRoutable,
-                  Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent,
+                  Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,
                   FullDatePipe, ShortDatePipe, FromNowPipe
                  ],
   providers:    [ ApiService, DataStore, AuthService],
