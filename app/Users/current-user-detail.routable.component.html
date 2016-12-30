@@ -1,0 +1,7 @@
+<div class="card" *ngIf="currentUser">
+    <div class="card-block">
+        <h6>User {{currentUser.annotation.fullName}}</h6>
+        <gg-user-detail [userObservable]="currentUserObservable" [path]="'user|'+currentUser.data._id"  [isRoot]="true" [state]="state"></gg-user-detail>        
+    </div>
+</div>
+

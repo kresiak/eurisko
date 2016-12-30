@@ -1,0 +1,34 @@
+<template ngbModalContainer></template>
+
+<nav class="navbar  navbar-default top-nav">
+	<div class="row">
+		<div class="col-lg-4 col-md-2 hidden-sm-down vcenter">
+			<a href="#"><img src="./images/GIGAlogo.png" /></a>
+			<a class="hidden-md-down" href="#"><img id="ulgLogo" src="./images/ULglogo.gif" /></a>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-3 vcenter">
+			<h1 style="text-align:center">Eurisko 2017</h1>
+		</div>
+		<div class="col-lg-2 col-md-1 hidden-sm-down vcenter">
+
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-2 vcenter">
+			<div class="form-group">
+				<select class="form-control" style="margin-top:10px" (change)="userSelected($event.target.value)">
+                    <option *ngFor="let user of users" [value]="user.data._id" [selected]="user.data._id===currentUserId">{{user.annotation.fullName}}</option>
+                </select>
+				<input class="form-control" type="text" placeholder="password"/>
+			</div>
+		</div>
+	</div>
+
+</nav>
+<nav class="navbar  navbar-dark bg-inverse">
+	<ul class="nav navbar-nav">
+		<li *ngFor="let menuItem of menu" [class.active]="menuItem.active" class="nav-item">
+			<a class="nav-link" (click)="activateMenu(menuItem)" routerLink="{{menuItem.route}}">{{menuItem.title}}</a>
+		</li>
+	</ul>
+</nav>
+
+<router-outlet></router-outlet>
