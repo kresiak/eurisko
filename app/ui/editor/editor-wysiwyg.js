@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var SimpleTinyComponent = (function () {
     function SimpleTinyComponent() {
+        this.content = '';
         this.onEditorKeyup = new core_1.EventEmitter();
     }
     SimpleTinyComponent.prototype.ngAfterViewInit = function () {
@@ -31,10 +32,18 @@ var SimpleTinyComponent = (function () {
     SimpleTinyComponent.prototype.ngOnDestroy = function () {
         tinymce.remove(this.editor);
     };
+    SimpleTinyComponent.prototype.resetContent = function () {
+        this.content = '';
+        tinymce.get(this.elementId).setContent('');
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
     ], SimpleTinyComponent.prototype, "elementId", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], SimpleTinyComponent.prototype, "content", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
@@ -42,7 +51,7 @@ var SimpleTinyComponent = (function () {
     SimpleTinyComponent = __decorate([
         core_1.Component({
             selector: 'simple-tiny',
-            template: "<textarea id=\"{{elementId}}\"></textarea>"
+            template: "<textarea id=\"{{elementId}}\">{{content}}</textarea>"
         }), 
         __metadata('design:paramtypes', [])
     ], SimpleTinyComponent);

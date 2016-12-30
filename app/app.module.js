@@ -21,6 +21,7 @@ var home_component_1 = require('./home.component');
 var job_enter_component_1 = require('./Jobs/job-enter.component');
 var user_detail_component_1 = require('./Users/user-detail.component');
 var current_user_detail_routable_component_1 = require('./Users/current-user-detail.routable.component');
+var job_view_component_1 = require('./Jobs/job-view.component');
 var editor_wysiwyg_1 = require('./ui/editor/editor-wysiwyg');
 var editor_1 = require('./ui/editor/editor');
 var editor_number_1 = require('./ui/editor/editor-number');
@@ -54,13 +55,14 @@ var AppModule = (function () {
                     { path: "dashboard", component: home_component_1.HomeComponent },
                     { path: "myeurisko", component: current_user_detail_routable_component_1.CurrentUserDetailComponentRoutable },
                     { path: "home", component: home_component_1.HomeComponent },
+                    { path: "jobview/:id", component: job_view_component_1.JobViewComponentRoutable },
                     { path: "", component: home_component_1.HomeComponent, pathMatch: 'full' },
                     { path: '**', redirectTo: '/home' }
                 ])
             ],
             declarations: [app_component_1.AppComponent, home_component_1.HomeComponent,
                 comment_component_1.CommentComponent, comments_component_1.CommentsComponent,
-                job_enter_component_1.JobEnterComponent,
+                job_enter_component_1.JobEnterComponent, job_view_component_1.JobViewComponent, job_view_component_1.JobViewComponentRoutable,
                 user_detail_component_1.UserDetailComponent, current_user_detail_routable_component_1.CurrentUserDetailComponentRoutable,
                 editor_1.Editor, editor_number_1.EditorNumber, editor_date_1.EditorDate, editor_boolean_1.EditorBoolean, checkbox_1.Checkbox, selector_component_1.SelectorComponent, editor_wysiwyg_1.SimpleTinyComponent,
                 fulldate_pipe_1.FullDatePipe, shortdate_pipe_1.ShortDatePipe, fromnow_pipe_1.FromNowPipe

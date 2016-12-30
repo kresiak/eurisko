@@ -4,31 +4,33 @@
         <div class="container-fluid">
             <form [formGroup]="jobForm" (ngSubmit)="save(jobForm.value, jobForm.valid)">
                 <div class="form-group row">
+                    <label for="description" class="col-sm-2 col-form-label col-xl-2">Title:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" formControlName="title"  placeholder="enter title of position">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Background:</label>
                     <div class="col-sm-10">
-<!--                        <textarea class="form-control" formControlName="description" id="description" placeholder="background and description of the position">
--->                        <textarea rows="4" cols="50" formControlName="description">
-                           
-                        </textarea>                        
-                        <simple-tiny [elementId]="'aktiny5'" (onEditorKeyup)="descriptionChanged($event)" ></simple-tiny> 
+                        <simple-tiny #descriptionChild [elementId]="'description'" (onEditorKeyup)="descriptionChanged($event)" ></simple-tiny> 
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Required education:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="education" id="education" placeholder="required education">
+                        <simple-tiny #educationChild [elementId]="'education'" (onEditorKeyup)="educationChanged($event)" ></simple-tiny> 
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Requirements:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="requirements" id="requirements" placeholder="add here general requirements such as: highly motivated, excellent communication, ...">
+                        <simple-tiny #requirementsChild [elementId]="'requirements'" (onEditorKeyup)="requirementsChanged($event)" ></simple-tiny> 
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Application:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="procedure" id="procedure" placeholder="special requirements regarding the application: include publications, describe your interests, ...">
+                        <simple-tiny #procedureChild [elementId]="'procedure'" (onEditorKeyup)="procedureChanged($event)" ></simple-tiny> 
                     </div>
                 </div>
                 <div class="row">

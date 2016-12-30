@@ -23,20 +23,18 @@ var JobEnterComponent = (function () {
             _this.userId = user.data._id;
         });
         this.jobForm = this.formBuilder.group({
-            description: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-            education: ['', forms_1.Validators.required],
-            requirements: ['', forms_1.Validators.required],
-            procedure: ['', forms_1.Validators.required],
+            title: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]]
         });
     };
     JobEnterComponent.prototype.save = function (formValue, isValid) {
         var _this = this;
         this.dataStore.addData('job.request', {
+            title: formValue.title,
             userId: this.userId,
-            description: formValue.description,
-            education: formValue.education,
-            requirements: formValue.requirements,
-            procedure: formValue.procedure
+            description: this.description,
+            education: this.education,
+            requirements: this.requirements,
+            procedure: this.procedure
         }).subscribe(function (res) {
             var x = res;
             _this.reset();
@@ -44,14 +42,43 @@ var JobEnterComponent = (function () {
     };
     JobEnterComponent.prototype.reset = function () {
         this.jobForm.reset();
+        this.descriptionChild.resetContent();
+        this.educationChild.resetContent();
+        this.requirementsChild.resetContent();
+        this.procedureChild.resetContent();
     };
     JobEnterComponent.prototype.descriptionChanged = function (content) {
-        var x = content;
+        this.description = content;
+    };
+    JobEnterComponent.prototype.educationChanged = function (content) {
+        this.education = content;
+    };
+    JobEnterComponent.prototype.requirementsChanged = function (content) {
+        this.requirements = content;
+    };
+    JobEnterComponent.prototype.procedureChanged = function (content) {
+        this.procedure = content;
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Rx_1.Observable)
     ], JobEnterComponent.prototype, "userObservable", void 0);
+    __decorate([
+        core_1.ViewChild('descriptionChild'), 
+        __metadata('design:type', Object)
+    ], JobEnterComponent.prototype, "descriptionChild", void 0);
+    __decorate([
+        core_1.ViewChild('educationChild'), 
+        __metadata('design:type', Object)
+    ], JobEnterComponent.prototype, "educationChild", void 0);
+    __decorate([
+        core_1.ViewChild('requirementsChild'), 
+        __metadata('design:type', Object)
+    ], JobEnterComponent.prototype, "requirementsChild", void 0);
+    __decorate([
+        core_1.ViewChild('procedureChild'), 
+        __metadata('design:type', Object)
+    ], JobEnterComponent.prototype, "procedureChild", void 0);
     JobEnterComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

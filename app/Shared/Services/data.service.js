@@ -34,6 +34,13 @@ var DataStore = (function () {
     DataStore.prototype.getDataObservable = function (table) {
         return this.getObservable(table);
     };
+    DataStore.prototype.getAnnotableDataObservable = function (table) {
+        return this.getObservable(table).map(function (list) {
+            return list.map(function (element) {
+                return { data: element, annotation: {} };
+            });
+        });
+    };
     DataStore.prototype.addData = function (table, newRecord) {
         var _this = this;
         var obs = this.apiService.crudCreateRecord(table, newRecord);

@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core'
+import { Component, Input, Output, OnInit, ViewChild } from '@angular/core'
 import { DataStore } from './../Shared/Services/data.service'
 import { Observable } from 'rxjs/Rx'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -18,6 +18,11 @@ export class JobEnterComponent implements OnInit {
     @Input() userObservable: Observable<any>
     userId: string
 
+     @ViewChild('descriptionChild') descriptionChild;
+     @ViewChild('educationChild') educationChild;
+     @ViewChild('requirementsChild') requirementsChild;
+     @ViewChild('procedureChild') procedureChild;
+
     ngOnInit():void
     {
         this.userObservable.subscribe(user => {
@@ -25,22 +30,25 @@ export class JobEnterComponent implements OnInit {
         })
 
         this.jobForm= this.formBuilder.group({
-            description: ['', [Validators.required, Validators.minLength(5)]],
-            education: ['', Validators.required],
-            requirements: ['', Validators.required],
-            procedure: ['', Validators.required],
+            title: ['', [Validators.required, Validators.minLength(5)]]
         });
     }
 
+    title: string
+    description: string
+    education: string
+    requirements: string
+    procedure: string
 
     save(formValue, isValid)
     {
         this.dataStore.addData('job.request', {
+            title: formValue.title,
             userId: this.userId,
-            description: formValue.description,
-            education: formValue.education,
-            requirements: formValue.requirements,
-            procedure: formValue.procedure
+            description: this.description,
+            education: this.education,
+            requirements: this.requirements,
+            procedure: this.procedure
         }).subscribe(res =>
         {
             var x=res;
@@ -50,10 +58,28 @@ export class JobEnterComponent implements OnInit {
 
     reset()
     {
-        this.jobForm.reset();        
+        this.jobForm.reset();   
+        this.descriptionChild.resetContent()  
+        this.educationChild.resetContent() 
+        this.requirementsChild.resetContent() 
+        this.procedureChild.resetContent() 
     }
 
+
     descriptionChanged(content) {
-        let x= content
+        this.description= content
     }
+
+    educationChanged(content) {
+        this.education= content
+    }
+
+    requirementsChanged(content) {
+        this.requirements= content
+    }
+
+    procedureChanged(content) {
+        this.procedure= content
+    }
+    
 }

@@ -37,6 +37,13 @@ export class DataStore { // contains one observable property by database table/c
         return this.getObservable(table);
     }
 
+    getAnnotableDataObservable(table: string) {
+        return this.getObservable(table).map(list => {
+            return list.map(element => {
+               return {data: element, annotation: {}} 
+            }) });
+    }
+
     addData(table: string, newRecord: any): Observable<any> {
         let obs = this.apiService.crudCreateRecord(table, newRecord);
         obs.subscribe(res => this.triggerNext(table));
