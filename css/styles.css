@@ -181,6 +181,10 @@ ul.mail{
     width: 120px;
 }
 
+.darkbackground {
+    background-color: darkgrey;
+}
+
 .vcenter {
     display: inline-block;
     vertical-align: middle;

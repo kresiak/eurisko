@@ -19,6 +19,8 @@ var ng2_simple_page_scroll_1 = require('ng2-simple-page-scroll/ng2-simple-page-s
 var app_component_1 = require('./app.component');
 var home_component_1 = require('./home.component');
 var job_enter_component_1 = require('./Jobs/job-enter.component');
+var job_detail_component_1 = require('./Jobs/job-detail.component');
+var job_list_component_1 = require('./Jobs/job-list.component');
 var user_detail_component_1 = require('./Users/user-detail.component');
 var current_user_detail_routable_component_1 = require('./Users/current-user-detail.routable.component');
 var job_view_component_1 = require('./Jobs/job-view.component');
@@ -32,6 +34,7 @@ var selector_component_1 = require('./ui/selector/selector.component');
 var comment_component_1 = require('./Comments/comment.component');
 var comments_component_1 = require('./Comments/comments.component');
 var api_service_1 = require('./Shared/Services/api.service');
+var job_service_1 = require('./Shared/Services/job.service');
 var data_service_1 = require('./Shared/Services/data.service');
 var auth_service_1 = require('./Shared/Services/auth.service');
 var fulldate_pipe_1 = require('./Shared/Pipes/fulldate.pipe');
@@ -62,12 +65,12 @@ var AppModule = (function () {
             ],
             declarations: [app_component_1.AppComponent, home_component_1.HomeComponent,
                 comment_component_1.CommentComponent, comments_component_1.CommentsComponent,
-                job_enter_component_1.JobEnterComponent, job_view_component_1.JobViewComponent, job_view_component_1.JobViewComponentRoutable,
+                job_enter_component_1.JobEnterComponent, job_view_component_1.JobViewComponent, job_view_component_1.JobViewComponentRoutable, job_list_component_1.JobListComponent, job_detail_component_1.JobDetailComponent,
                 user_detail_component_1.UserDetailComponent, current_user_detail_routable_component_1.CurrentUserDetailComponentRoutable,
                 editor_1.Editor, editor_number_1.EditorNumber, editor_date_1.EditorDate, editor_boolean_1.EditorBoolean, checkbox_1.Checkbox, selector_component_1.SelectorComponent, editor_wysiwyg_1.SimpleTinyComponent,
                 fulldate_pipe_1.FullDatePipe, shortdate_pipe_1.ShortDatePipe, fromnow_pipe_1.FromNowPipe
             ],
-            providers: [api_service_1.ApiService, data_service_1.DataStore, auth_service_1.AuthService],
+            providers: [api_service_1.ApiService, data_service_1.DataStore, auth_service_1.AuthService, job_service_1.JobService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

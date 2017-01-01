@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx'
 import { DataStore } from './../Shared/Services/data.service'
+import { JobService } from '../Shared/Services/job.service'
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -13,13 +14,13 @@ import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 )
 
 export class UserDetailComponent implements OnInit {
-    constructor(private dataStore: DataStore) {
+    constructor(private dataStore: DataStore, private jobService: JobService) {
     }
 
     @Input() userObservable: Observable<any>;
     @Input() state;
     @Input() path: string
-    @Input() isRoot: boolean= false
+    @Input() isRoot: boolean = false
     @Output() stateChanged = new EventEmitter()
 
     private stateInit() {
@@ -32,15 +33,15 @@ export class UserDetailComponent implements OnInit {
         this.userObservable.subscribe(user => {
             this.user = user;
             if (user) {
-                //this.otpsObservable= this.orderService.getAnnotatedOpenOtpsByCategory(category.data._id)
+                this.annotatedJobsObservable = this.jobService.getAnnotatedJobsByUserId(user.data._id)
             }
-            
         })
     }
 
     //private model;
     private user
-    //private otpsObservable: Observable<any>;
+    private annotatedJobsObservable: Observable<any>
+
 
     commentsUpdated(comments) {
         if (this.user && comments) {
@@ -62,6 +63,6 @@ export class UserDetailComponent implements OnInit {
     private childProductsStateChanged($event) {
         this.state.Products = $event;
         this.stateChanged.next(this.state);
-    }    
+    }
 
 }

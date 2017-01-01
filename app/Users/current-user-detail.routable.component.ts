@@ -15,7 +15,7 @@ export class CurrentUserDetailComponentRoutable implements OnInit {
     state: {}
 
 
-    currentUserObservable: Observable<any>;
+    currentUserObservable: Observable<any>
 
     initData() {
         this.currentUserObservable= this.authService.getAnnotatedCurrentUser()

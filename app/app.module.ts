@@ -12,6 +12,8 @@ import { AppComponent } from './app.component'
 import { HomeComponent} from './home.component'
 
 import {JobEnterComponent} from './Jobs/job-enter.component'
+import {JobDetailComponent} from './Jobs/job-detail.component'
+import {JobListComponent} from './Jobs/job-list.component'
 import {UserDetailComponent} from './Users/user-detail.component'
 import {CurrentUserDetailComponentRoutable} from './Users/current-user-detail.routable.component'
 import {JobViewComponent, JobViewComponentRoutable} from './Jobs/job-view.component'
@@ -26,7 +28,8 @@ import {SelectorComponent} from './ui/selector/selector.component'
 import {CommentComponent} from './Comments/comment.component'
 import {CommentsComponent} from './Comments/comments.component'
 
-import {ApiService} from './Shared/Services/api.service';
+import {ApiService} from './Shared/Services/api.service'
+import {JobService} from './Shared/Services/job.service'
 import {DataStore} from './Shared/Services/data.service';
 import {AuthService} from './Shared/Services/auth.service'
 import {FullDatePipe} from './Shared/Pipes/fulldate.pipe'
@@ -56,12 +59,12 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
    ],
   declarations: [ AppComponent, HomeComponent, 
                   CommentComponent, CommentsComponent,
-                  JobEnterComponent, JobViewComponent, JobViewComponentRoutable,
+                  JobEnterComponent, JobViewComponent, JobViewComponentRoutable, JobListComponent, JobDetailComponent,
                   UserDetailComponent, CurrentUserDetailComponentRoutable,
                   Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,
                   FullDatePipe, ShortDatePipe, FromNowPipe
                  ],
-  providers:    [ ApiService, DataStore, AuthService],
+  providers:    [ ApiService, DataStore, AuthService, JobService],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

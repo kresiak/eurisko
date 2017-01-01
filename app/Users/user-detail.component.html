@@ -24,7 +24,7 @@
 	</ngb-tab>
 	<ngb-tab title="Positions" id="tabPositions">
 		<template ngbTabContent>
-			
+            <gg-job-list [jobsObservable]="annotatedJobsObservable" [state]="state"></gg-job-list>
 		</template>
 	</ngb-tab>
 	<ngb-tab title="Add a position" id="tabAddPosition">

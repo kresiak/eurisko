@@ -11,78 +11,79 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Rx_1 = require('rxjs/Rx');
 var data_service_1 = require('./../Shared/Services/data.service');
-var job_service_1 = require('../Shared/Services/job.service');
-var UserDetailComponent = (function () {
-    function UserDetailComponent(dataStore, jobService) {
+var JobDetailComponent = (function () {
+    function JobDetailComponent(dataStore) {
         this.dataStore = dataStore;
-        this.jobService = jobService;
         this.isRoot = false;
         this.stateChanged = new core_1.EventEmitter();
     }
-    UserDetailComponent.prototype.stateInit = function () {
+    JobDetailComponent.prototype.stateInit = function () {
         if (!this.state)
             this.state = {};
         if (!this.state.selectedTabId)
             this.state.selectedTabId = '';
     };
-    UserDetailComponent.prototype.ngOnInit = function () {
+    JobDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.stateInit();
-        this.userObservable.subscribe(function (user) {
-            _this.user = user;
-            if (user) {
-                _this.annotatedJobsObservable = _this.jobService.getAnnotatedJobsByUserId(user.data._id);
+        this.jobObservable.subscribe(function (job) {
+            _this.job = job;
+            if (job) {
             }
         });
     };
-    UserDetailComponent.prototype.commentsUpdated = function (comments) {
-        if (this.user && comments) {
-            this.user.data.comments = comments;
-            this.dataStore.updateData('users.eurisko', this.user.data._id, this.user.data);
+    JobDetailComponent.prototype.commentsUpdated = function (comments) {
+        if (this.job && comments) {
+            this.job.data.comments = comments;
+            this.dataStore.updateData('categories', this.job.data._id, this.job.data);
         }
     };
-    UserDetailComponent.prototype.emailUpdated = function (email) {
-        this.user.data.email = email;
-        this.dataStore.updateData('users.eurisko', this.user.data._id, this.user.data);
-    };
-    UserDetailComponent.prototype.beforeTabChange = function ($event) {
+    JobDetailComponent.prototype.beforeTabChange = function ($event) {
+        if ($event.nextId === 'tabMax') {
+            $event.preventDefault();
+        }
+        if ($event.nextId === 'gotoTop') {
+            $event.preventDefault();
+            //this.navigationService.jumpToTop()
+            return;
+        }
         this.state.selectedTabId = $event.nextId;
         this.stateChanged.next(this.state);
     };
     ;
-    UserDetailComponent.prototype.childProductsStateChanged = function ($event) {
-        this.state.Products = $event;
+    JobDetailComponent.prototype.childResponsesStateChanged = function ($event) {
+        this.state.Responses = $event;
         this.stateChanged.next(this.state);
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Rx_1.Observable)
-    ], UserDetailComponent.prototype, "userObservable", void 0);
+    ], JobDetailComponent.prototype, "jobObservable", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], UserDetailComponent.prototype, "state", void 0);
+    ], JobDetailComponent.prototype, "state", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
-    ], UserDetailComponent.prototype, "path", void 0);
+    ], JobDetailComponent.prototype, "path", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)
-    ], UserDetailComponent.prototype, "isRoot", void 0);
+    ], JobDetailComponent.prototype, "isRoot", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], UserDetailComponent.prototype, "stateChanged", void 0);
-    UserDetailComponent = __decorate([
+    ], JobDetailComponent.prototype, "stateChanged", void 0);
+    JobDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'gg-user-detail',
-            templateUrl: './user-detail.component.html'
+            selector: 'gg-job-detail',
+            templateUrl: './job-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService])
-    ], UserDetailComponent);
-    return UserDetailComponent;
+        __metadata('design:paramtypes', [data_service_1.DataStore])
+    ], JobDetailComponent);
+    return JobDetailComponent;
 }());
-exports.UserDetailComponent = UserDetailComponent;
-//# sourceMappingURL=user-detail.component.js.map
+exports.JobDetailComponent = JobDetailComponent;
+//# sourceMappingURL=job-detail.component.js.map
