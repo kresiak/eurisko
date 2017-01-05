@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var data_service_1 = require('./../Shared/Services/data.service');
-var Rx_1 = require('rxjs/Rx');
 var forms_1 = require('@angular/forms');
 var ApplicationEnterComponent = (function () {
     function ApplicationEnterComponent(dataStore, formBuilder) {
@@ -18,9 +17,7 @@ var ApplicationEnterComponent = (function () {
         this.formBuilder = formBuilder;
     }
     ApplicationEnterComponent.prototype.ngOnInit = function () {
-        //this.Observable.subscribe(user => {
-        //        this.jobId= job.request.data._id
-        //}
+        this.jobId = "5866bb11a014c21bec84b645";
         this.applicationForm = this.formBuilder.group({
             surname: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3)]]
@@ -29,6 +26,7 @@ var ApplicationEnterComponent = (function () {
     ApplicationEnterComponent.prototype.save = function (formValue, isValid) {
         var _this = this;
         this.dataStore.addData('job.response', {
+            jobId: this.jobId,
             surname: formValue.surname,
             name: formValue.name
         }).subscribe(function (res) {
@@ -41,7 +39,7 @@ var ApplicationEnterComponent = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Rx_1.Observable)
+        __metadata('design:type', Object)
     ], ApplicationEnterComponent.prototype, "ID", void 0);
     ApplicationEnterComponent = __decorate([
         core_1.Component({

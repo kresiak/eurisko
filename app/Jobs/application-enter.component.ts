@@ -14,18 +14,18 @@ export class ApplicationEnterComponent implements OnInit {
     constructor(private dataStore: DataStore, private formBuilder: FormBuilder) {
 
     }
-
-    @Input() ID: Observable<any>
+ 
+    @Input() ID;
     jobId: string 
     
     ngOnInit():void
     {
-            //this.Observable.subscribe(user => {
-    //        this.jobId= job.request.data._id
-        
-      //}
+          
 
+        this.jobId = "5866bb11a014c21bec84b645"
+        
         this.applicationForm= this.formBuilder.group({
+           
             surname: ['', [Validators.required, Validators.minLength(5)]],
             name: ['',[Validators.required, Validators.minLength(3)]]
         });
@@ -34,6 +34,7 @@ export class ApplicationEnterComponent implements OnInit {
     save(formValue, isValid)
     {
         this.dataStore.addData('job.response', {
+            jobId : this.jobId, 
             surname: formValue.surname,
             name: formValue.name
         }).subscribe(res =>
@@ -47,4 +48,4 @@ export class ApplicationEnterComponent implements OnInit {
     {
         this.applicationForm.reset();   
     }
-
+}
