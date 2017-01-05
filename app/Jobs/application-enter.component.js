@@ -19,7 +19,7 @@ var ApplicationEnterComponent = (function () {
     ApplicationEnterComponent.prototype.ngOnInit = function () {
         //        this.jobId = "5866bb11a014c21bec84b645"
         this.applicationForm = this.formBuilder.group({
-            idRequest: "5866bb11a014c21bec84b645",
+            ID: this.jobId,
             surname: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3)]]
         });
@@ -27,7 +27,7 @@ var ApplicationEnterComponent = (function () {
     ApplicationEnterComponent.prototype.save = function (formValue, isValid) {
         var _this = this;
         this.dataStore.addData('job.response', {
-            jobId: formValue.idRequest,
+            jobId: this.ID,
             surname: formValue.surname,
             name: formValue.name
         }).subscribe(function (res) {
