@@ -22,10 +22,10 @@ export class ApplicationEnterComponent implements OnInit {
     {
           
 
-        this.jobId = "5866bb11a014c21bec84b645"
+//        this.jobId = "5866bb11a014c21bec84b645"
         
         this.applicationForm= this.formBuilder.group({
-           
+            idRequest: "5866bb11a014c21bec84b645",
             surname: ['', [Validators.required, Validators.minLength(5)]],
             name: ['',[Validators.required, Validators.minLength(3)]]
         });
@@ -34,7 +34,7 @@ export class ApplicationEnterComponent implements OnInit {
     save(formValue, isValid)
     {
         this.dataStore.addData('job.response', {
-            jobId : this.jobId, 
+            jobId : formValue.idRequest, 
             surname: formValue.surname,
             name: formValue.name
         }).subscribe(res =>
