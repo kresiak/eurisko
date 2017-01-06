@@ -17,9 +17,7 @@ var ApplicationEnterComponent = (function () {
         this.formBuilder = formBuilder;
     }
     ApplicationEnterComponent.prototype.ngOnInit = function () {
-        //        this.jobId = "5866bb11a014c21bec84b645"
         this.applicationForm = this.formBuilder.group({
-            ID: this.jobId,
             surname: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3)]]
         });
@@ -27,7 +25,7 @@ var ApplicationEnterComponent = (function () {
     ApplicationEnterComponent.prototype.save = function (formValue, isValid) {
         var _this = this;
         this.dataStore.addData('job.response', {
-            jobId: this.ID,
+            'jobId': this.jobId,
             surname: formValue.surname,
             name: formValue.name
         }).subscribe(function (res) {
@@ -40,8 +38,8 @@ var ApplicationEnterComponent = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ApplicationEnterComponent.prototype, "ID", void 0);
+        __metadata('design:type', String)
+    ], ApplicationEnterComponent.prototype, "jobId", void 0);
     ApplicationEnterComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

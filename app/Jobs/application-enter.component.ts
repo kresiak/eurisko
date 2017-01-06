@@ -15,17 +15,12 @@ export class ApplicationEnterComponent implements OnInit {
 
     }
  
-    @Input() ID;
-    jobId: string 
+    @Input() jobId: string;
     
     ngOnInit():void
     {
           
-
-//        this.jobId = "5866bb11a014c21bec84b645"
-        
         this.applicationForm= this.formBuilder.group({
-            ID: this.jobId,
             surname: ['', [Validators.required, Validators.minLength(5)]],
             name: ['',[Validators.required, Validators.minLength(3)]]
         });
@@ -34,7 +29,7 @@ export class ApplicationEnterComponent implements OnInit {
     save(formValue, isValid)
     {
         this.dataStore.addData('job.response', {
-            jobId : this.ID, 
+            'jobId' : this.jobId, 
             surname: formValue.surname,
             name: formValue.name
         }).subscribe(res =>
