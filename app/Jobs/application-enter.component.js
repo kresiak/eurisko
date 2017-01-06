@@ -18,16 +18,34 @@ var ApplicationEnterComponent = (function () {
     }
     ApplicationEnterComponent.prototype.ngOnInit = function () {
         this.applicationForm = this.formBuilder.group({
-            surname: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-            name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3)]]
+            name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
+            firstName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3)]],
+            age: ['', [forms_1.Validators.required]],
+            citizenship: ['', [forms_1.Validators.required]],
+            address: ['', [forms_1.Validators.required]],
+            email: ['', [forms_1.Validators.required]],
+            telephone: ['', [forms_1.Validators.required]],
+            countryOfResidence: ['', [forms_1.Validators.required]],
+            education: ['', [forms_1.Validators.required]],
+            publications: ['', [forms_1.Validators.required]],
+            presentOccupation: ['', [forms_1.Validators.required]]
         });
     };
     ApplicationEnterComponent.prototype.save = function (formValue, isValid) {
         var _this = this;
         this.dataStore.addData('job.response', {
             'jobId': this.jobId,
-            surname: formValue.surname,
-            name: formValue.name
+            name: formValue.name,
+            firstName: formValue.firstName,
+            age: formValue.age,
+            citizenship: formValue.citizenship,
+            address: formValue.address,
+            email: formValue.email,
+            telephone: formValue.telephone,
+            countryOfResidence: formValue.countryOfResidence,
+            education: formValue.education,
+            publications: formValue.publications,
+            presentOccupation: formValue.presentOccupation
         }).subscribe(function (res) {
             var x = res;
             _this.reset();

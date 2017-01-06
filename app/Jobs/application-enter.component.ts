@@ -20,9 +20,18 @@ export class ApplicationEnterComponent implements OnInit {
     ngOnInit():void
     {
           
-        this.applicationForm= this.formBuilder.group({
-            surname: ['', [Validators.required, Validators.minLength(5)]],
-            name: ['',[Validators.required, Validators.minLength(3)]]
+        this.applicationForm = this.formBuilder.group({
+            name: ['', [Validators.required, Validators.minLength(5)]],
+            firstName: ['', [Validators.required, Validators.minLength(3)]],
+            age: ['', [Validators.required]],
+            citizenship: ['', [Validators.required]],
+            address: ['', [Validators.required]],
+            email: ['', [Validators.required]],
+            telephone: ['', [Validators.required]],
+            countryOfResidence: ['', [Validators.required]],
+            education: ['', [Validators.required]],
+            publications: ['', [Validators.required]],
+            presentOccupation: ['', [Validators.required]]
         });
     }
     
@@ -30,8 +39,17 @@ export class ApplicationEnterComponent implements OnInit {
     {
         this.dataStore.addData('job.response', {
             'jobId' : this.jobId, 
-            surname: formValue.surname,
-            name: formValue.name
+            name: formValue.name,
+            firstName: formValue.firstName,
+            age: formValue.age,
+            citizenship: formValue.citizenship,
+            address: formValue.address,
+            email: formValue.email,
+            telephone: formValue.telephone,
+            countryOfResidence: formValue.countryOfResidence,
+            education: formValue.education,
+            publications: formValue.publications,
+            presentOccupation: formValue.presentOccupation
         }).subscribe(res =>
         {
             var x = res;
