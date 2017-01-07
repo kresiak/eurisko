@@ -30,6 +30,11 @@ export class UserDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.stateInit();
+
+        this.jobService.getAnnotatedResponseById('58701fc19fb3303b80e8759d').subscribe(xx => {
+            let dd=xx
+        })
+
         this.userObservable.subscribe(user => {
             this.user = user;
             if (user) {

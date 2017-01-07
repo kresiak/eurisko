@@ -28,6 +28,9 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.stateInit();
+        this.jobService.getAnnotatedResponseById('58701fc19fb3303b80e8759d').subscribe(function (xx) {
+            var dd = xx;
+        });
         this.userObservable.subscribe(function (user) {
             _this.user = user;
             if (user) {
