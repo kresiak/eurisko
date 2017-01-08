@@ -18,6 +18,7 @@ import {UserDetailComponent} from './Users/user-detail.component'
 import {CurrentUserDetailComponentRoutable} from './Users/current-user-detail.routable.component'
 import {JobViewComponent, JobViewComponentRoutable} from './Jobs/job-view.component'
 import {ApplicationEnterComponent} from './Jobs/application-enter.component'
+import {ApplicationViewComponent} from './Jobs/application-view.component' 
 
 import {SimpleTinyComponent} from './ui/editor/editor-wysiwyg'
 import {Editor} from './ui/editor/editor'
@@ -61,7 +62,7 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
   declarations: [ AppComponent, HomeComponent, 
                   CommentComponent, CommentsComponent,
                   JobEnterComponent, JobViewComponent, JobViewComponentRoutable, JobListComponent, JobDetailComponent,
-                  ApplicationEnterComponent,
+                  ApplicationEnterComponent, ApplicationViewComponent,
                   UserDetailComponent, CurrentUserDetailComponentRoutable,
                   Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,
                   FullDatePipe, ShortDatePipe, FromNowPipe
