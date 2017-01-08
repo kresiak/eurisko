@@ -1,22 +1,17 @@
-<!--<template ngbTabContent>-->
-	<div class="card">
-		<div class="card-block">
-			<div class="row">
-				<div class="col-sm-3">id:</div>
-				<div class="col-sm-6">{{responseId}}</div>
-			</div>  
-            <div class="row">
-				<div class="col-sm-3">job title:</div>
-				<div class="col-sm-6">{{job.annotation.jobTitle}}</div>
-			</div>                    
-			<div class="row">
-				<div class="col-sm-3 vcenter">full name:</div>
-				<div class="col-sm-6 vcenter">
-                    <div class="col-sm-6">{{["0"].annotation.candidateFullName}}</div>
-			    </div>
+
+		<div class="card">
+			<div class="card-block">
+				<div class="row">
+					<div class="col-sm-3">id:</div>
+					<div class="col-sm-6">{{responseId}}</div>
+				</div>  
+				<div class="row">
+					<div class="col-sm-3">job title:</div>
+					<div class="col-sm-6">{{response.annotation.jobTitle}}</div>
+				</div>                    
+				<div class="row">
+					<div class="col-sm-3">full name:</div>
+					<div class="col-sm-6">{{response.annotation.candidateFullName}}</div>
+				</div>
 			</div>
 		</div>
-	</div>
-
-<!--</template>-->
-        
