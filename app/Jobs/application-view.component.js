@@ -19,7 +19,7 @@ var ApplicationViewComponent = (function () {
     ApplicationViewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.jobService.getAnnotatedResponseById(this.responseId).subscribe(function (response) {
-            _this.response = response;
+            _this.response = response[0];
         });
     };
     __decorate([

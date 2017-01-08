@@ -23,7 +23,7 @@ export class ApplicationViewComponent implements OnInit {
     ngOnInit():void
     {
         this.jobService.getAnnotatedResponseById(this.responseId).subscribe(response => {
-            this.response = response;
+            this.response = response[0];
         });
 
     }
