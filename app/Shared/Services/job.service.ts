@@ -62,6 +62,6 @@ export class JobService {
     }
 
     getAnnotatedResponseById(responseId: string) : Observable<any> {
-        return this.getAnnotatedResponses().map(responses => responses.filter(response => response.data._id===responseId))
+        return this.getAnnotatedResponses().map(responses => responses.filter(response => response.data._id===responseId)[0])
     }
 }

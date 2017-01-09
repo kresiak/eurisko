@@ -63,7 +63,7 @@ var JobService = (function () {
         return this.getAnnotatedJobs().map(function (jobs) { return jobs.filter(function (job) { return job.data.userId === userId; }); });
     };
     JobService.prototype.getAnnotatedResponseById = function (responseId) {
-        return this.getAnnotatedResponses().map(function (responses) { return responses.filter(function (response) { return response.data._id === responseId; }); });
+        return this.getAnnotatedResponses().map(function (responses) { return responses.filter(function (response) { return response.data._id === responseId; })[0]; });
     };
     JobService = __decorate([
         __param(0, core_1.Inject(data_service_1.DataStore)),
