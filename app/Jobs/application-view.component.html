@@ -49,5 +49,33 @@
 					<div class="col-sm-2">present occupation:</div>
 					<div class="col-sm-10">{{response.data.presentOccupation}}</div>
 				</div>
+	
+				<form [formGroup]="applicationForm" (ngSubmit)="save(applicationForm.value, applicationForm.valid)">
+					<div class="form-group row">
+                    	<label for="description" class="col-sm-2 col-form-label col-xl-2">score:</label>
+                    		<div class="col-sm-10">
+								<select class="form-control" formControlName="piScore" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</div>
+					</div>
+				
+					<div class="form-group row">
+						<label for="description" class="col-sm-2 col-form-label col-xl-2">remarques:</label>
+						<div class="col-sm-10">
+							<textarea rows="4" class="form-control" formControlName="piRemarque" placeholder="enter remarques"></textarea>
+						</div>
+					</div>
+					<div class="row">
+                    	<div class="col-sm-3 col-md-2 col-lg-2">
+                        	<button class="btn btn-success" type="submit" [disabled]="!applicationForm.valid">Submit</button>
+                    	</div>
+					</div>
+				</form>
 			</div>
 		</div>
+
+	

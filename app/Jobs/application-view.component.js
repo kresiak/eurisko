@@ -11,15 +11,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var data_service_1 = require('./../Shared/Services/data.service');
 var job_service_1 = require('../Shared/Services/job.service');
+var forms_1 = require('@angular/forms');
 var ApplicationViewComponent = (function () {
-    function ApplicationViewComponent(dataStore, jobService) {
+    function ApplicationViewComponent(dataStore, jobService, formBuilder) {
         this.dataStore = dataStore;
         this.jobService = jobService;
+        this.formBuilder = formBuilder;
     }
     ApplicationViewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.jobService.getAnnotatedResponseById(this.responseId).subscribe(function (response) {
             _this.response = response;
+        });
+        this.applicationForm = this.formBuilder.group({
+            piScore: ['', [forms_1.Validators.required]],
+            piRemarque: ['', [forms_1.Validators.required]]
+        });
+    };
+    ApplicationViewComponent.prototype.save = function (formValue, isValid) {
+        this.dataStore.addData('job.response', {
+            piScore: formValue.piScore,
+            piRemarque: formValue.piRemarque
         });
     };
     __decorate([
@@ -32,7 +44,7 @@ var ApplicationViewComponent = (function () {
             selector: 'gg-application-view',
             templateUrl: './application-view.component.html'
         }), 
-        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService])
+        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService, forms_1.FormBuilder])
     ], ApplicationViewComponent);
     return ApplicationViewComponent;
 }());

@@ -12,8 +12,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 
 export class ApplicationViewComponent implements OnInit {
+    private applicationForm: FormGroup;
 
-    constructor(private dataStore: DataStore, private jobService: JobService) {
+    constructor(private dataStore: DataStore, private jobService: JobService, private formBuilder: FormBuilder) {
 
     }
  
@@ -26,8 +27,20 @@ export class ApplicationViewComponent implements OnInit {
             this.response = response;
         });
 
-    }
-
     
+
+    this.applicationForm = this.formBuilder.group({
+            piScore: ['', [Validators.required]],
+            piRemarque: ['', [Validators.required]]
+        });
+    }
+      
+    save(formValue, isValid)
+    {
+        this.dataStore.addData('job.response', {
+            piScore: formValue.piScore,
+            piRemarque: formValue.piRemarque
+        });
+    }
     
 }
