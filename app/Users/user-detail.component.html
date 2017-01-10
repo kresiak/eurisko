@@ -17,7 +17,7 @@
 			</div>
 		</template>
 	</ngb-tab>
-	<ngb-tab title="Comments" id="tabComments">
+	<ngb-tab title="Notes" id="tabComments">
 		<template ngbTabContent>
 			<gg-comments [comments]="user.data.comments" (commentsUpdated)="commentsUpdated($event)"></gg-comments>
 		</template>
@@ -32,10 +32,4 @@
             <gg-job-enter [userObservable]="userObservable"></gg-job-enter>
 		</template>
 	</ngb-tab>
-<!--	<ngb-tab title="See response" id="tabSeeResponse">
-		<template ngbTabContent>
-			<gg-application-view [responseId]="'58701fc19fb3303b80e8759d'"></gg-application-view>
-		</template>
-	</ngb-tab>
--->		
 </ngb-tabset>

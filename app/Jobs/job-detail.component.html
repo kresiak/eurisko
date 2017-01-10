@@ -5,8 +5,8 @@
 			<div class="card">
 				<div class="card-block">
 					<div class="row">
-						<div class="col-sm-3 vcenter">title:</div>
-						<div class="col-sm-6 vcenter">
+						<div class="col-sm-2 vcenter">title:</div>
+						<div class="col-sm-9 vcenter">
 							{{job.data.title}}
 						</div>
 					</div>
@@ -26,7 +26,22 @@
 	</ngb-tab>
 	<ngb-tab title="Edit" id="tabbJobEdit">
 		<template ngbTabContent>
-            
+			<div class="card">
+				<div class="card-block">
+					<div class="row">
+						<div class="col-sm-2 vcenter">title:</div>
+						<div class="col-sm-9 vcenter">
+                            <gg-editor [content]="job.data.title" [showControls]="true" (editSaved)="titleChanged($event)"></gg-editor>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2 vcenter">description:</div>
+						<div class="col-sm-9 vcenter">
+                            <gg-editor-tinymce [content]="job.data.description" (editSaved)="descriptionChanged($event)"></gg-editor-tinymce>
+						</div>
+					</div>
+				</div>
+			</div>            
 		</template>
 	</ngb-tab>
 	<ngb-tab title="Responses" id="tabbJobResponse">

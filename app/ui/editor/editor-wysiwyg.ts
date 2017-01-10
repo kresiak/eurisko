@@ -27,7 +27,11 @@ export class SimpleTinyComponent implements AfterViewInit, OnDestroy {
             skin_url: 'assets/skins/lightgray',
             setup: editor => {
                 this.editor = editor;
-                editor.on('keyup', () => {
+/*                editor.on('keyup', () => {
+                    const content = editor.getContent();
+                    this.onEditorKeyup.emit(content);
+                });
+*/                editor.on('change', () => {
                     const content = editor.getContent();
                     this.onEditorKeyup.emit(content);
                 });

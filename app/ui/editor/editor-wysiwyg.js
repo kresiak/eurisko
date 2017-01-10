@@ -22,7 +22,11 @@ var SimpleTinyComponent = (function () {
             skin_url: 'assets/skins/lightgray',
             setup: function (editor) {
                 _this.editor = editor;
-                editor.on('keyup', function () {
+                /*                editor.on('keyup', () => {
+                                    const content = editor.getContent();
+                                    this.onEditorKeyup.emit(content);
+                                });
+                */ editor.on('change', function () {
                     var content = editor.getContent();
                     _this.onEditorKeyup.emit(content);
                 });

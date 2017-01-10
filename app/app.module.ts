@@ -26,6 +26,7 @@ import {Editor} from './ui/editor/editor'
 import {EditorNumber} from './ui/editor/editor-number'
 import {EditorDate} from './ui/editor/editor-date'
 import {EditorBoolean} from './ui/editor/editor-boolean'
+import {EditorTinyMce} from './ui/editor/editor-tnymce'
 import {Checkbox} from './ui/checkbox/checkbox'
 import {SelectorComponent} from './ui/selector/selector.component'
 import {CommentComponent} from './Comments/comment.component'
@@ -66,7 +67,7 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
                   JobEnterComponent, JobViewComponent, JobViewComponentRoutable, JobListComponent, JobDetailComponent,
                   ApplicationEnterComponent, ApplicationDetailComponent,ApplicationEnterComponentRoutable, ApplicationListComponent,
                   UserDetailComponent, CurrentUserDetailComponentRoutable,
-                  Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,
+                  Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,EditorTinyMce,
                   FullDatePipe, ShortDatePipe, FromNowPipe
                  ],
   providers:    [ ApiService, DataStore, AuthService, JobService],

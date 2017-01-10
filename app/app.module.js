@@ -32,6 +32,7 @@ var editor_1 = require('./ui/editor/editor');
 var editor_number_1 = require('./ui/editor/editor-number');
 var editor_date_1 = require('./ui/editor/editor-date');
 var editor_boolean_1 = require('./ui/editor/editor-boolean');
+var editor_tnymce_1 = require('./ui/editor/editor-tnymce');
 var checkbox_1 = require('./ui/checkbox/checkbox');
 var selector_component_1 = require('./ui/selector/selector.component');
 var comment_component_1 = require('./Comments/comment.component');
@@ -72,7 +73,7 @@ var AppModule = (function () {
                 job_enter_component_1.JobEnterComponent, job_view_component_1.JobViewComponent, job_view_component_1.JobViewComponentRoutable, job_list_component_1.JobListComponent, job_detail_component_1.JobDetailComponent,
                 application_enter_component_1.ApplicationEnterComponent, application_detail_component_1.ApplicationDetailComponent, application_enter_component_1.ApplicationEnterComponentRoutable, application_list_component_1.ApplicationListComponent,
                 user_detail_component_1.UserDetailComponent, current_user_detail_routable_component_1.CurrentUserDetailComponentRoutable,
-                editor_1.Editor, editor_number_1.EditorNumber, editor_date_1.EditorDate, editor_boolean_1.EditorBoolean, checkbox_1.Checkbox, selector_component_1.SelectorComponent, editor_wysiwyg_1.SimpleTinyComponent,
+                editor_1.Editor, editor_number_1.EditorNumber, editor_date_1.EditorDate, editor_boolean_1.EditorBoolean, checkbox_1.Checkbox, selector_component_1.SelectorComponent, editor_wysiwyg_1.SimpleTinyComponent, editor_tnymce_1.EditorTinyMce,
                 fulldate_pipe_1.FullDatePipe, shortdate_pipe_1.ShortDatePipe, fromnow_pipe_1.FromNowPipe
             ],
             providers: [api_service_1.ApiService, data_service_1.DataStore, auth_service_1.AuthService, job_service_1.JobService],

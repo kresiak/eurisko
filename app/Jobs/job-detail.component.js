@@ -38,7 +38,7 @@ var JobDetailComponent = (function () {
     JobDetailComponent.prototype.commentsUpdated = function (comments) {
         if (this.job && comments) {
             this.job.data.comments = comments;
-            this.dataStore.updateData('categories', this.job.data._id, this.job.data);
+            this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
         }
     };
     JobDetailComponent.prototype.beforeTabChange = function ($event) {
@@ -57,6 +57,14 @@ var JobDetailComponent = (function () {
     JobDetailComponent.prototype.childResponsesStateChanged = function ($event) {
         this.state.Responses = $event;
         this.stateChanged.next(this.state);
+    };
+    JobDetailComponent.prototype.titleChanged = function (title) {
+        this.job.data.title = title;
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    };
+    JobDetailComponent.prototype.descriptionChanged = function (description) {
+        this.job.data.description = description;
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
     };
     __decorate([
         core_1.Input(), 

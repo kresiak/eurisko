@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx'
 import { DataStore } from './../Shared/Services/data.service'
-import {JobService} from './../Shared/Services/job.service'
+import { JobService } from './../Shared/Services/job.service'
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from "moment"
 
@@ -21,7 +21,7 @@ export class JobDetailComponent implements OnInit {
     @Input() jobObservable: Observable<any>;
     @Input() state;
     @Input() path: string
-    @Input() isRoot: boolean= false
+    @Input() isRoot: boolean = false
     @Output() stateChanged = new EventEmitter()
 
     private stateInit() {
@@ -34,19 +34,19 @@ export class JobDetailComponent implements OnInit {
         this.jobObservable.subscribe(job => {
             this.job = job;
             if (job) {
-                this.applicationsObservable= this.jobService.getAnnotatedResponsesByJobId(job.data._id)
-            }            
+                this.applicationsObservable = this.jobService.getAnnotatedResponsesByJobId(job.data._id)
+            }
         })
     }
 
     //private model;
     private job
-    private applicationsObservable : Observable<any> 
+    private applicationsObservable: Observable<any>
 
     commentsUpdated(comments) {
         if (this.job && comments) {
             this.job.data.comments = comments;
-            this.dataStore.updateData('categories', this.job.data._id, this.job.data);
+            this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
         }
     }
 
@@ -59,8 +59,8 @@ export class JobDetailComponent implements OnInit {
             $event.preventDefault();
             //this.navigationService.jumpToTop()
             return
-        }        
-        
+        }
+
         this.state.selectedTabId = $event.nextId;
         this.stateChanged.next(this.state);
     };
@@ -68,7 +68,16 @@ export class JobDetailComponent implements OnInit {
     private childResponsesStateChanged($event) {
         this.state.Responses = $event;
         this.stateChanged.next(this.state);
-    }    
+    }
 
+    private titleChanged(title) {
+        this.job.data.title = title
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    }
+
+    private descriptionChanged(description) {
+        this.job.data.description = description
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    }
 
 }
