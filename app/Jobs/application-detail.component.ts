@@ -13,8 +13,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 
 export class ApplicationDetailComponent implements OnInit {
+private applicationViewForm: FormGroup;
 
-    constructor(private dataStore: DataStore, private jobService: JobService) {
+    constructor(private dataStore: DataStore, private jobService: JobService, private formBuilder: FormBuilder) {
 
     }
  
@@ -23,7 +24,8 @@ export class ApplicationDetailComponent implements OnInit {
     @Input() path: string
     @Input() isRoot: boolean= false
     @Output() stateChanged = new EventEmitter()
- 
+    @Input() responseId: string;
+ //   private response: any;
     private application: any;
 
     private stateInit() {
@@ -36,6 +38,11 @@ export class ApplicationDetailComponent implements OnInit {
         this.stateInit()
         this.applicationObservable.subscribe(application => {
             this.application = application;
+        });
+
+        this.applicationViewForm = this.formBuilder.group({
+            piScore: ['', [Validators.required]],
+            piRemarque: ['', [Validators.required]]
         });
 
     }
@@ -60,5 +67,13 @@ export class ApplicationDetailComponent implements OnInit {
         this.stateChanged.next(this.state);
     }    
     
-    
+    save(formValue, isValid)
+    {
+        this.application.data.piFeedback = {
+            score: formValue.piScore,
+            comment: formValue.piRemarque
+        }  
+
+        this.dataStore.updateData('job.response', this.application.data._id, this.application.data )
+    }
 }

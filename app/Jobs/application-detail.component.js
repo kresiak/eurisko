@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var data_service_1 = require('./../Shared/Services/data.service');
 var job_service_1 = require('../Shared/Services/job.service');
 var Rx_1 = require('rxjs/Rx');
+var forms_1 = require('@angular/forms');
 var ApplicationDetailComponent = (function () {
-    function ApplicationDetailComponent(dataStore, jobService) {
+    function ApplicationDetailComponent(dataStore, jobService, formBuilder) {
         this.dataStore = dataStore;
         this.jobService = jobService;
+        this.formBuilder = formBuilder;
         this.isRoot = false;
         this.stateChanged = new core_1.EventEmitter();
     }
@@ -30,6 +32,10 @@ var ApplicationDetailComponent = (function () {
         this.stateInit();
         this.applicationObservable.subscribe(function (application) {
             _this.application = application;
+        });
+        this.applicationViewForm = this.formBuilder.group({
+            piScore: ['', [forms_1.Validators.required]],
+            piRemarque: ['', [forms_1.Validators.required]]
         });
     };
     ApplicationDetailComponent.prototype.beforeTabChange = function ($event) {
@@ -48,6 +54,13 @@ var ApplicationDetailComponent = (function () {
     ApplicationDetailComponent.prototype.childResponsesStateChanged = function ($event) {
         this.state.Responses = $event;
         this.stateChanged.next(this.state);
+    };
+    ApplicationDetailComponent.prototype.save = function (formValue, isValid) {
+        this.application.data.piFeedback = {
+            score: formValue.piScore,
+            comment: formValue.piRemarque
+        };
+        this.dataStore.updateData('job.response', this.application.data._id, this.application.data);
     };
     __decorate([
         core_1.Input(), 
@@ -69,13 +82,17 @@ var ApplicationDetailComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], ApplicationDetailComponent.prototype, "stateChanged", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], ApplicationDetailComponent.prototype, "responseId", void 0);
     ApplicationDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'gg-application-detail',
             templateUrl: './application-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService])
+        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService, forms_1.FormBuilder])
     ], ApplicationDetailComponent);
     return ApplicationDetailComponent;
 }());
