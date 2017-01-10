@@ -40,6 +40,24 @@
                             <gg-editor-tinymce [content]="job.data.description" (editSaved)="descriptionChanged($event)"></gg-editor-tinymce>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-2 vcenter">education:</div>
+						<div class="col-sm-9 vcenter">
+                            <gg-editor-tinymce [content]="job.data.education" (editSaved)="educationChanged($event)"></gg-editor-tinymce>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2 vcenter">requirements:</div>
+						<div class="col-sm-9 vcenter">
+                            <gg-editor-tinymce [content]="job.data.requirements" (editSaved)="requirementsChanged($event)"></gg-editor-tinymce>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2 vcenter">procedure:</div>
+						<div class="col-sm-9 vcenter">
+                            <gg-editor-tinymce [content]="job.data.procedure" (editSaved)="procedureChanged($event)"></gg-editor-tinymce>
+						</div>
+					</div>
 				</div>
 			</div>            
 		</template>

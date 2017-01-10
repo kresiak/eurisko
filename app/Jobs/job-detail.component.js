@@ -66,6 +66,18 @@ var JobDetailComponent = (function () {
         this.job.data.description = description;
         this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
     };
+    JobDetailComponent.prototype.educationChanged = function (education) {
+        this.job.data.education = education;
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    };
+    JobDetailComponent.prototype.procedureChanged = function (procedure) {
+        this.job.data.procedure = procedure;
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    };
+    JobDetailComponent.prototype.requirementsChanged = function (requirements) {
+        this.job.data.requirements = requirements;
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Rx_1.Observable)
