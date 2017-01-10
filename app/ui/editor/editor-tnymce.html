@@ -1,5 +1,5 @@
 <div class="editor__editable-content">
-    <simple-tiny #tinymceInEditor [elementId]="'tinymceInEditor'" [content]="contentEdited" (onEditorKeyup)="tinymceChanged($event)" ></simple-tiny> 
+    <simple-tiny #tinymceInEditor [elementId]="'tinymceInEditor'+id" [content]="contentEdited" (onEditorKeyup)="tinymceChanged($event)" ></simple-tiny> 
 </div>
 
 <div class="editor__output" [innerHTML]="content"></div>

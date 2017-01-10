@@ -13,6 +13,7 @@ var EditorTinyMce = (function () {
     function EditorTinyMce() {
         this.editMode = false;
         this.editSaved = new core_1.EventEmitter();
+        this.id = EditorTinyMce.counter++;
     }
     EditorTinyMce.prototype.ngOnInit = function () {
         this.contentEdited = this.content;
@@ -37,6 +38,7 @@ var EditorTinyMce = (function () {
     EditorTinyMce.prototype.tinymceChanged = function (content) {
         this.contentEdited = content;
     };
+    EditorTinyMce.counter = 0;
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

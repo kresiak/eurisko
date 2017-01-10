@@ -10,14 +10,20 @@ import { Component, Input, Output, OnInit, OnChanges, ViewEncapsulation, EventEm
     encapsulation: ViewEncapsulation.None
 })
 export class EditorTinyMce implements OnInit, OnChanges {
+    private static counter: number= 0
     @Input() content;
     @Input() @HostBinding('class.editor--edit-mode') editMode = false;
     @Output() editSaved = new EventEmitter();
 
     private contentEdited;    
+    private id: number
+
+    constructor() {
+        this.id= EditorTinyMce.counter++
+    }
 
     ngOnInit(): void {
-        this.contentEdited = this.content;
+        this.contentEdited = this.content;        
     }
 
     ngOnChanges(changes) {
