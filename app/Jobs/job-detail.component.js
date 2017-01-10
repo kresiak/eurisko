@@ -32,6 +32,9 @@ var JobDetailComponent = (function () {
             _this.job = job;
             if (job) {
                 _this.applicationsObservable = _this.jobService.getAnnotatedResponsesByJobId(job.data._id);
+                _this.applicationsObservable.subscribe(function (applications) {
+                    _this.applications = applications;
+                });
             }
         });
     };

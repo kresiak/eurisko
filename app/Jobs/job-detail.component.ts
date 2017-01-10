@@ -35,6 +35,9 @@ export class JobDetailComponent implements OnInit {
             this.job = job;
             if (job) {
                 this.applicationsObservable = this.jobService.getAnnotatedResponsesByJobId(job.data._id)
+                this.applicationsObservable.subscribe(applications => {
+                    this.applications= applications
+                })
             }
         })
     }
@@ -42,6 +45,7 @@ export class JobDetailComponent implements OnInit {
     //private model;
     private job
     private applicationsObservable: Observable<any>
+    private applications: any
 
     commentsUpdated(comments) {
         if (this.job && comments) {

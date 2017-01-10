@@ -18,6 +18,7 @@ var UserDetailComponent = (function () {
         this.jobService = jobService;
         this.isRoot = false;
         this.stateChanged = new core_1.EventEmitter();
+        this.hasJobRequests = false;
     }
     UserDetailComponent.prototype.stateInit = function () {
         if (!this.state)
@@ -32,6 +33,9 @@ var UserDetailComponent = (function () {
             _this.user = user;
             if (user) {
                 _this.annotatedJobsObservable = _this.jobService.getAnnotatedJobsByUserId(user.data._id);
+                _this.annotatedJobsObservable.subscribe(function (jobs) {
+                    _this.hasJobRequests = jobs && jobs.length > 0;
+                });
             }
         });
     };

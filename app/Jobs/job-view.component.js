@@ -39,7 +39,7 @@ var JobViewComponentRoutable = (function () {
     ], JobViewComponentRoutable.prototype, "jobObservable", void 0);
     JobViewComponentRoutable = __decorate([
         core_1.Component({
-            template: "<gg-job-view [jobObservable]=\"jobObservable\"></gg-job-view>"
+            template: "<gg-job-view [jobObservable]=\"jobObservable\" [canApply]=\"true\"></gg-job-view>"
         }), 
         __metadata('design:paramtypes', [data_service_1.DataStore, router_1.ActivatedRoute])
     ], JobViewComponentRoutable);
@@ -49,7 +49,7 @@ exports.JobViewComponentRoutable = JobViewComponentRoutable;
 var JobViewComponent = (function () {
     function JobViewComponent(router) {
         this.router = router;
-        this.canApply = true;
+        this.canApply = false;
     }
     JobViewComponent.prototype.ngOnInit = function () {
         var _this = this;

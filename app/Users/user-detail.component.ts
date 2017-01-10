@@ -35,6 +35,9 @@ export class UserDetailComponent implements OnInit {
             this.user = user;
             if (user) {
                 this.annotatedJobsObservable = this.jobService.getAnnotatedJobsByUserId(user.data._id)
+                this.annotatedJobsObservable.subscribe(jobs => {
+                    this.hasJobRequests= jobs && jobs.length > 0
+                })
             }
         })
     }
@@ -42,6 +45,7 @@ export class UserDetailComponent implements OnInit {
     //private model;
     private user
     private annotatedJobsObservable: Observable<any>
+    private hasJobRequests: boolean= false
 
 
     commentsUpdated(comments) {

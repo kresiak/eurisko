@@ -6,7 +6,7 @@ import { DataStore } from './../Shared/Services/data.service'
 
 @Component(
     {
-        template: `<gg-job-view [jobObservable]="jobObservable"></gg-job-view>`
+        template: `<gg-job-view [jobObservable]="jobObservable" [canApply]="true"></gg-job-view>`
     }
 )
 export class JobViewComponentRoutable implements OnInit {
@@ -46,7 +46,7 @@ export class JobViewComponent implements OnInit {
     }
 
     @Input() jobObservable: Observable<any>;
-    @Input() canApply: boolean = true
+    @Input() canApply: boolean = false
 
     ngOnInit(): void {
         this.jobObservable.subscribe(job => {
@@ -58,6 +58,6 @@ export class JobViewComponent implements OnInit {
         let link = ['/jobapply', this.job.data._id];
         this.router.navigate(link);
     }
-    
+
     private job;
 }

@@ -22,7 +22,7 @@
 			<gg-comments [comments]="user.data.comments" (commentsUpdated)="commentsUpdated($event)"></gg-comments>
 		</template>
 	</ngb-tab>
-	<ngb-tab title="Positions" id="tabPositions">
+	<ngb-tab title="Positions" id="tabPositions" *ngIf="hasJobRequests">
 		<template ngbTabContent>
             <gg-job-list [jobsObservable]="annotatedJobsObservable" [state]="state"></gg-job-list>
 		</template>
