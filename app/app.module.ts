@@ -14,6 +14,7 @@ import { HomeComponent} from './home.component'
 import {JobEnterComponent} from './Jobs/job-enter.component'
 import {JobDetailComponent} from './Jobs/job-detail.component'
 import {JobListComponent} from './Jobs/job-list.component'
+import {JobAllComponentRoutable} from './Jobs/job-all.routable.component'
 import {UserDetailComponent} from './Users/user-detail.component'
 import {CurrentUserDetailComponentRoutable} from './Users/current-user-detail.routable.component'
 import {JobViewComponent, JobViewComponentRoutable} from './Jobs/job-view.component'
@@ -54,6 +55,7 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
           Ng2SimplePageScrollModule.forRoot(),
           RouterModule.forRoot([
             { path: "dashboard", component: HomeComponent},
+            { path: "jobs", component: JobAllComponentRoutable},
             { path: "myeurisko", component: CurrentUserDetailComponentRoutable},
             { path: "home", component: HomeComponent},
             { path: "jobview/:id", component: JobViewComponentRoutable},
@@ -64,7 +66,7 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
    ],
   declarations: [ AppComponent, HomeComponent, 
                   CommentComponent, CommentsComponent,
-                  JobEnterComponent, JobViewComponent, JobViewComponentRoutable, JobListComponent, JobDetailComponent,
+                  JobEnterComponent, JobViewComponent, JobViewComponentRoutable, JobListComponent, JobDetailComponent, JobAllComponentRoutable,
                   ApplicationEnterComponent, ApplicationDetailComponent,ApplicationEnterComponentRoutable, ApplicationListComponent,
                   UserDetailComponent, CurrentUserDetailComponentRoutable,
                   Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,EditorTinyMce,

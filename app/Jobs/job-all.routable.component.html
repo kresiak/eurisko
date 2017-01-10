@@ -1,0 +1,27 @@
+<template #searchPopContent>
+	<ul>
+		<li>biology: if the job description includes 'biology'</li>
+	</ul>
+</template>
+
+<div class="card">
+	<div class="card-block">
+		<div class="row">
+			<div [formGroup]="searchForm">
+				<img src="./images/search.png" (click)="showSearch= !showSearch" class="imgSearch" />
+				<input *ngIf="showSearch" type="search" [formControl]="searchControl" formControlName="searchControl" [ngbPopover]="searchPopContent"
+					placement="right" triggers="mouseenter:mouseleave" popoverTitle="How to search: examples">
+			</div>
+		</div>
+		<div class="row">
+            <ul style="list-style: none;">
+                <li *ngFor="let job of jobs">
+                    <h4>{{job.data.title}}</h4>
+                    <p><span [innerHtml]="job.data.description"></span> <a [routerLink]="'/jobview/' + job.data._id">See more or apply for the position...</a></p>
+                    
+                    <br/>
+                </li>
+            </ul>
+		</div>
+	</div>
+</div>
