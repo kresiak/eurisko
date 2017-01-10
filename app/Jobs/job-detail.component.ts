@@ -84,4 +84,19 @@ export class JobDetailComponent implements OnInit {
         this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
     }
 
+    private educationChanged(education) {
+        this.job.data.education = education
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    }
+
+    private procedureChanged(procedure) {
+        this.job.data.procedure = procedure
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    }
+
+    private requirementsChanged(requirements) {
+        this.job.data.requirements = requirements
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    }
+
 }
