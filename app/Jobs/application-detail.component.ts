@@ -7,25 +7,25 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 
 @Component({
-        moduleId: module.id,
-        selector: 'gg-application-detail',
-        templateUrl: './application-detail.component.html'    
+    moduleId: module.id,
+    selector: 'gg-application-detail',
+    templateUrl: './application-detail.component.html'
 })
 
 export class ApplicationDetailComponent implements OnInit {
-private applicationViewForm: FormGroup;
+    private applicationViewForm: FormGroup;
 
     constructor(private dataStore: DataStore, private jobService: JobService, private formBuilder: FormBuilder) {
 
     }
- 
+
     @Input() applicationObservable: Observable<any>;
     @Input() state;
     @Input() path: string
-    @Input() isRoot: boolean= false
+    @Input() isRoot: boolean = false
     @Output() stateChanged = new EventEmitter()
     @Input() responseId: string;
- //   private response: any;
+    //   private response: any;
     private application: any;
 
     private stateInit() {
@@ -33,18 +33,20 @@ private applicationViewForm: FormGroup;
         if (!this.state.selectedTabId) this.state.selectedTabId = '';
     }
 
-    ngOnInit():void
-    {
+    ngOnInit(): void {
         this.stateInit()
-        this.applicationObservable.subscribe(application => {
-            this.application = application;
-        });
 
         this.applicationViewForm = this.formBuilder.group({
             piScore: ['', [Validators.required]],
             piRemarque: ['', [Validators.required]]
-        });
+        })
 
+        this.applicationObservable.subscribe(application => {
+            this.application = application;
+            this.applicationViewForm.controls['piRemarque'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.comment : '')
+            this.applicationViewForm.controls['piScore'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.score : '')
+        });
+      
     }
 
     public beforeTabChange($event: NgbTabChangeEvent) {
@@ -56,8 +58,8 @@ private applicationViewForm: FormGroup;
             $event.preventDefault();
             //this.navigationService.jumpToTop()
             return
-        }        
-        
+        }
+
         this.state.selectedTabId = $event.nextId;
         this.stateChanged.next(this.state);
     };
@@ -65,15 +67,14 @@ private applicationViewForm: FormGroup;
     private childResponsesStateChanged($event) {
         this.state.Responses = $event;
         this.stateChanged.next(this.state);
-    }    
-    
-    save(formValue, isValid)
-    {
+    }
+
+    save(formValue, isValid) {
         this.application.data.piFeedback = {
             score: formValue.piScore,
             comment: formValue.piRemarque
-        }  
+        }
 
-        this.dataStore.updateData('job.response', this.application.data._id, this.application.data )
+        this.dataStore.updateData('job.response', this.application.data._id, this.application.data)
     }
 }

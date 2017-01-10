@@ -30,12 +30,14 @@ var ApplicationDetailComponent = (function () {
     ApplicationDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.stateInit();
-        this.applicationObservable.subscribe(function (application) {
-            _this.application = application;
-        });
         this.applicationViewForm = this.formBuilder.group({
             piScore: ['', [forms_1.Validators.required]],
             piRemarque: ['', [forms_1.Validators.required]]
+        });
+        this.applicationObservable.subscribe(function (application) {
+            _this.application = application;
+            _this.applicationViewForm.controls['piRemarque'].setValue(_this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.comment : '');
+            _this.applicationViewForm.controls['piScore'].setValue(_this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.score : '');
         });
     };
     ApplicationDetailComponent.prototype.beforeTabChange = function ($event) {
