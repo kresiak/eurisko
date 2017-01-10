@@ -38,6 +38,12 @@
                     <div class="col-sm-10" [innerHTML]="job.data.procedure"></div>
                     <div class="col-sm-1"></div>
                 </div>        
+                <br/>
+                <div class="row" *ngIf="canApply"> 
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10"><button type="button" (click)="doApply()">Apply for this position</button></div>
+                    <div class="col-sm-1"></div>
+                </div>        
             </div>
         </div>
     </div>

@@ -17,8 +17,9 @@ import {JobListComponent} from './Jobs/job-list.component'
 import {UserDetailComponent} from './Users/user-detail.component'
 import {CurrentUserDetailComponentRoutable} from './Users/current-user-detail.routable.component'
 import {JobViewComponent, JobViewComponentRoutable} from './Jobs/job-view.component'
-import {ApplicationEnterComponent} from './Jobs/application-enter.component'
-import {ApplicationViewComponent} from './Jobs/application-view.component' 
+import {ApplicationEnterComponent, ApplicationEnterComponentRoutable} from './Jobs/application-enter.component'
+import {ApplicationDetailComponent} from './Jobs/application-detail.component' 
+import {ApplicationListComponent} from './Jobs/application-list.component'
 
 import {SimpleTinyComponent} from './ui/editor/editor-wysiwyg'
 import {Editor} from './ui/editor/editor'
@@ -55,6 +56,7 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
             { path: "myeurisko", component: CurrentUserDetailComponentRoutable},
             { path: "home", component: HomeComponent},
             { path: "jobview/:id", component: JobViewComponentRoutable},
+            { path: "jobapply/:id", component: ApplicationEnterComponentRoutable},            
             { path: "", component: HomeComponent, pathMatch: 'full'},
             { path: '**', redirectTo: '/home'}
           ])
@@ -62,7 +64,7 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
   declarations: [ AppComponent, HomeComponent, 
                   CommentComponent, CommentsComponent,
                   JobEnterComponent, JobViewComponent, JobViewComponentRoutable, JobListComponent, JobDetailComponent,
-                  ApplicationEnterComponent, ApplicationViewComponent,
+                  ApplicationEnterComponent, ApplicationDetailComponent,ApplicationEnterComponentRoutable, ApplicationListComponent,
                   UserDetailComponent, CurrentUserDetailComponentRoutable,
                   Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,
                   FullDatePipe, ShortDatePipe, FromNowPipe

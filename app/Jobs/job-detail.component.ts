@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx'
 import { DataStore } from './../Shared/Services/data.service'
+import {JobService} from './../Shared/Services/job.service'
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from "moment"
 
@@ -14,7 +15,7 @@ import * as moment from "moment"
 )
 
 export class JobDetailComponent implements OnInit {
-    constructor(private dataStore: DataStore) {
+    constructor(private dataStore: DataStore, private jobService: JobService) {
     }
 
     @Input() jobObservable: Observable<any>;
@@ -33,15 +34,14 @@ export class JobDetailComponent implements OnInit {
         this.jobObservable.subscribe(job => {
             this.job = job;
             if (job) {
-            }
-            
+                this.applicationsObservable= this.jobService.getAnnotatedResponsesByJobId(job.data._id)
+            }            
         })
     }
 
     //private model;
     private job
-    private productsObservable : Observable<any> 
-    private otpsObservable: Observable<any>;
+    private applicationsObservable : Observable<any> 
 
     commentsUpdated(comments) {
         if (this.job && comments) {

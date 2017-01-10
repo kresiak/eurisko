@@ -10,13 +10,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var data_service_1 = require('./../Shared/Services/data.service');
+var router_1 = require('@angular/router');
 var forms_1 = require('@angular/forms');
+var ApplicationEnterComponentRoutable = (function () {
+    function ApplicationEnterComponentRoutable(route) {
+        this.route = route;
+    }
+    ApplicationEnterComponentRoutable.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            _this.id = params['id'];
+        });
+    };
+    ApplicationEnterComponentRoutable = __decorate([
+        core_1.Component({
+            template: "<gg-application-enter [jobId]=\"id\"></gg-application-enter>"
+        }), 
+        __metadata('design:paramtypes', [router_1.ActivatedRoute])
+    ], ApplicationEnterComponentRoutable);
+    return ApplicationEnterComponentRoutable;
+}());
+exports.ApplicationEnterComponentRoutable = ApplicationEnterComponentRoutable;
 var ApplicationEnterComponent = (function () {
-    function ApplicationEnterComponent(dataStore, formBuilder) {
+    function ApplicationEnterComponent(dataStore, formBuilder, router) {
         this.dataStore = dataStore;
         this.formBuilder = formBuilder;
+        this.router = router;
     }
     ApplicationEnterComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataStore.getDataObservable('job.request').map(function (jobs) { return jobs.filter(function (job) { return job._id === _this.jobId; })[0]; }).subscribe(function (job) {
+            _this.job = job;
+        });
         this.applicationForm = this.formBuilder.group({
             name: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             firstName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(3)]],
@@ -47,8 +72,8 @@ var ApplicationEnterComponent = (function () {
             publications: formValue.publications,
             presentOccupation: formValue.presentOccupation
         }).subscribe(function (res) {
-            var x = res;
-            _this.reset();
+            var link = ['/jobview', _this.jobId];
+            _this.router.navigate(link);
         });
     };
     ApplicationEnterComponent.prototype.reset = function () {
@@ -64,7 +89,7 @@ var ApplicationEnterComponent = (function () {
             selector: 'gg-application-enter',
             templateUrl: './application-enter.component.html'
         }), 
-        __metadata('design:paramtypes', [data_service_1.DataStore, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [data_service_1.DataStore, forms_1.FormBuilder, router_1.Router])
     ], ApplicationEnterComponent);
     return ApplicationEnterComponent;
 }());

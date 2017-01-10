@@ -9,39 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Rx_1 = require('rxjs/Rx');
 var data_service_1 = require('./../Shared/Services/data.service');
-var job_service_1 = require('./../Shared/Services/job.service');
-var JobDetailComponent = (function () {
-    function JobDetailComponent(dataStore, jobService) {
+var job_service_1 = require('../Shared/Services/job.service');
+var Rx_1 = require('rxjs/Rx');
+var ApplicationDetailComponent = (function () {
+    function ApplicationDetailComponent(dataStore, jobService) {
         this.dataStore = dataStore;
         this.jobService = jobService;
         this.isRoot = false;
         this.stateChanged = new core_1.EventEmitter();
     }
-    JobDetailComponent.prototype.stateInit = function () {
+    ApplicationDetailComponent.prototype.stateInit = function () {
         if (!this.state)
             this.state = {};
         if (!this.state.selectedTabId)
             this.state.selectedTabId = '';
     };
-    JobDetailComponent.prototype.ngOnInit = function () {
+    ApplicationDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.stateInit();
-        this.jobObservable.subscribe(function (job) {
-            _this.job = job;
-            if (job) {
-                _this.applicationsObservable = _this.jobService.getAnnotatedResponsesByJobId(job.data._id);
-            }
+        this.applicationObservable.subscribe(function (application) {
+            _this.application = application;
         });
     };
-    JobDetailComponent.prototype.commentsUpdated = function (comments) {
-        if (this.job && comments) {
-            this.job.data.comments = comments;
-            this.dataStore.updateData('categories', this.job.data._id, this.job.data);
-        }
-    };
-    JobDetailComponent.prototype.beforeTabChange = function ($event) {
+    ApplicationDetailComponent.prototype.beforeTabChange = function ($event) {
         if ($event.nextId === 'tabMax') {
             $event.preventDefault();
         }
@@ -54,39 +45,39 @@ var JobDetailComponent = (function () {
         this.stateChanged.next(this.state);
     };
     ;
-    JobDetailComponent.prototype.childResponsesStateChanged = function ($event) {
+    ApplicationDetailComponent.prototype.childResponsesStateChanged = function ($event) {
         this.state.Responses = $event;
         this.stateChanged.next(this.state);
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Rx_1.Observable)
-    ], JobDetailComponent.prototype, "jobObservable", void 0);
+    ], ApplicationDetailComponent.prototype, "applicationObservable", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], JobDetailComponent.prototype, "state", void 0);
+    ], ApplicationDetailComponent.prototype, "state", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
-    ], JobDetailComponent.prototype, "path", void 0);
+    ], ApplicationDetailComponent.prototype, "path", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)
-    ], JobDetailComponent.prototype, "isRoot", void 0);
+    ], ApplicationDetailComponent.prototype, "isRoot", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], JobDetailComponent.prototype, "stateChanged", void 0);
-    JobDetailComponent = __decorate([
+    ], ApplicationDetailComponent.prototype, "stateChanged", void 0);
+    ApplicationDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'gg-job-detail',
-            templateUrl: './job-detail.component.html'
+            selector: 'gg-application-detail',
+            templateUrl: './application-detail.component.html'
         }), 
         __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService])
-    ], JobDetailComponent);
-    return JobDetailComponent;
+    ], ApplicationDetailComponent);
+    return ApplicationDetailComponent;
 }());
-exports.JobDetailComponent = JobDetailComponent;
-//# sourceMappingURL=job-detail.component.js.map
+exports.ApplicationDetailComponent = ApplicationDetailComponent;
+//# sourceMappingURL=application-detail.component.js.map

@@ -31,7 +31,7 @@
 	</ngb-tab>
 	<ngb-tab title="Responses" id="tabbJobResponse">
 		<template ngbTabContent>
-            
+            <gg-application-list [applicationsObservable]="applicationsObservable" [state]="state"></gg-application-list>
 		</template>
 	</ngb-tab>
 	<ngb-tab id="tabMax">

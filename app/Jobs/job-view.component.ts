@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { ActivatedRoute, Params, Router, NavigationExtras } from '@angular/router'
 import { Observable } from 'rxjs/Rx'
 import { DataStore } from './../Shared/Services/data.service'
@@ -17,7 +17,7 @@ export class JobViewComponentRoutable implements OnInit {
 
     initData(id: string) {
         if (id) {
-            this.jobObservable = this.dataStore.getAnnotableDataObservable('job.request').map(jobs => jobs.filter(job=> job.data._id===id)[0]);
+            this.jobObservable = this.dataStore.getAnnotableDataObservable('job.request').map(jobs => jobs.filter(job => job.data._id === id)[0]);
             this.jobObservable.subscribe(obj => {
                 this.job = obj
             })
@@ -42,10 +42,11 @@ export class JobViewComponentRoutable implements OnInit {
     }
 )
 export class JobViewComponent implements OnInit {
-    constructor() {
+    constructor(private router: Router) {
     }
 
     @Input() jobObservable: Observable<any>;
+    @Input() canApply: boolean = true
 
     ngOnInit(): void {
         this.jobObservable.subscribe(job => {
@@ -53,5 +54,10 @@ export class JobViewComponent implements OnInit {
         });
     }
 
+    doApply() {
+        let link = ['/jobapply', this.job.data._id];
+        this.router.navigate(link);
+    }
+    
     private job;
 }

@@ -47,7 +47,9 @@ var JobViewComponentRoutable = (function () {
 }());
 exports.JobViewComponentRoutable = JobViewComponentRoutable;
 var JobViewComponent = (function () {
-    function JobViewComponent() {
+    function JobViewComponent(router) {
+        this.router = router;
+        this.canApply = true;
     }
     JobViewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -55,17 +57,25 @@ var JobViewComponent = (function () {
             _this.job = job;
         });
     };
+    JobViewComponent.prototype.doApply = function () {
+        var link = ['/jobapply', this.job.data._id];
+        this.router.navigate(link);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Rx_1.Observable)
     ], JobViewComponent.prototype, "jobObservable", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], JobViewComponent.prototype, "canApply", void 0);
     JobViewComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'gg-job-view',
             templateUrl: './job-view.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], JobViewComponent);
     return JobViewComponent;
 }());
