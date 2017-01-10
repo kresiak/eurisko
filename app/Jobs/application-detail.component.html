@@ -53,7 +53,38 @@
 	</ngb-tab>
 	<ngb-tab title="Feedback Pi" id="tabFeedbackPi">
 		<template ngbTabContent>
-			Ici je ferai plus tard (au chateau)
+			<form [formGroup]="applicationViewForm" (ngSubmit)="save(applicationViewForm.value, applicationViewForm.valid)">
+					<div class="form-group row">
+                    	<label for="description" class="col-sm-2 col-form-label col-xl-2">score:</label>
+                    		<div class="col-sm-10">
+								<select class="form-control" formControlName="piScore" id="sel0">
+									<option>0</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+								</select>
+							</div>
+					</div>
+				
+					<div class="form-group row">
+						<label for="description" class="col-sm-2 col-form-label col-xl-2">remarques:</label>
+						<div class="col-sm-10">
+							<textarea rows="4" class="form-control" formControlName="piRemarque" placeholder="enter remarques"></textarea>
+						</div>
+					</div>
+					<div class="row">
+                    	<div class="col-sm-3 col-md-2 col-lg-2">
+                        	<button class="btn btn-success" type="submit" [disabled]="!applicationViewForm.valid">Submit</button>
+                    	</div>
+					</div>
+				</form>
 		</template>
 	</ngb-tab>
 </ngb-tabset>
