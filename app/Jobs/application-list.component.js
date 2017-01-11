@@ -31,9 +31,24 @@ var ApplicationListComponent = (function () {
         var _this = this;
         this.stateInit();
         Rx_1.Observable.combineLatest(this.applicationsObservable, this.searchControl.valueChanges.startWith(''), function (applications, searchTxt) {
-            if (searchTxt.trim() === '')
+            var txt = searchTxt.trim().toUpperCase();
+            if (txt === '' || txt === '*' || txt === '$' || txt === '$>' || txt === '$<')
                 return applications;
-            return applications.filter(function (application) { return application.data.citizenship.toUpperCase().includes(searchTxt.toUpperCase()) || application.data.education.toUpperCase().includes(searchTxt.toUpperCase()); });
+            return applications.filter(function (application) {
+                if (txt.startsWith('*UNREAD')) {
+                    return application.annotation.isUnread;
+                }
+                if (txt.startsWith('*')) {
+                    return true;
+                }
+                if (txt.startsWith('$>') && +txt.slice(2)) {
+                    var score = +txt.slice(2);
+                    return application.data.piFeedback && +application.data.piFeedback.score >= score;
+                }
+                return application.data.citizenship.toUpperCase().includes(txt) || application.data.education.toUpperCase().includes(txt) || application.annotation.candidateFullName.toUpperCase().includes(txt)
+                    || application.data.countryOfResidence.toUpperCase().includes(txt) || application.data.address.toUpperCase().includes(txt) || application.data.publications.toUpperCase().includes(txt)
+                    || (application.data.piFeedback && application.data.piFeedback.comment.toUpperCase().includes(txt));
+            });
         }).subscribe(function (applications) { return _this.applications = applications; });
     };
     ApplicationListComponent.prototype.getApplicationObservable = function (id) {

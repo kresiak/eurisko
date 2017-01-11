@@ -31,9 +31,24 @@ var JobListComponent = (function () {
         var _this = this;
         this.stateInit();
         Rx_1.Observable.combineLatest(this.jobsObservable, this.searchControl.valueChanges.startWith(''), function (jobs, searchTxt) {
-            if (searchTxt.trim() === '')
+            var txt = searchTxt.trim().toUpperCase();
+            if (txt === '' || txt === '*' || txt === '$' || txt === '$>' || txt === '$<')
                 return jobs;
-            return jobs.filter(function (job) { return job.data.title.toUpperCase().includes(searchTxt.toUpperCase()) || job.data.description.toUpperCase().includes(searchTxt.toUpperCase()); });
+            return jobs.filter(function (job) {
+                if (txt.startsWith('*PUB')) {
+                    return job.data.isPublished;
+                }
+                if (txt.startsWith('*UNPUB')) {
+                    return !job.data.isPublished;
+                }
+                if (txt.startsWith('*UNREAD')) {
+                    return job.annotation.nbUnreadResponses > 0;
+                }
+                if (txt.startsWith('*')) {
+                    return true;
+                }
+                return job.data.title.toUpperCase().includes(txt) || job.data.description.toUpperCase().includes(txt) || job.data.education.toUpperCase().includes(txt);
+            });
         }).subscribe(function (jobs) { return _this.jobs = jobs; });
     };
     JobListComponent.prototype.getJobObservable = function (id) {
