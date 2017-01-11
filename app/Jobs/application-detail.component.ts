@@ -1,6 +1,7 @@
 import { Component, Input, Output, OnInit, ViewChild, EventEmitter } from '@angular/core'
 import { DataStore } from './../Shared/Services/data.service'
 import { JobService } from '../Shared/Services/job.service'
+import { UserService } from './../Shared/Services/user.service'
 import { Observable } from 'rxjs/Rx'
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -15,7 +16,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class ApplicationDetailComponent implements OnInit {
     private applicationViewForm: FormGroup;
 
-    constructor(private dataStore: DataStore, private jobService: JobService, private formBuilder: FormBuilder) {
+    constructor(private dataStore: DataStore, private jobService: JobService, private formBuilder: FormBuilder, private userService: UserService) {
 
     }
 
@@ -48,6 +49,16 @@ export class ApplicationDetailComponent implements OnInit {
         });
       
     }
+
+    setDashlet() {
+        this.userService.createApplicationDashletForCurrentUser(this.application.data._id);
+    }
+
+    removeDashlet(dashletId) {
+        if (dashletId)
+            this.userService.removeDashletForCurrentUser(dashletId);
+    }
+
 
     public beforeTabChange($event: NgbTabChangeEvent) {
         if ($event.nextId === 'tabMax') {

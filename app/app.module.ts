@@ -11,6 +11,9 @@ import {Ng2SimplePageScrollModule} from 'ng2-simple-page-scroll/ng2-simple-page-
 import { AppComponent } from './app.component'
 import { HomeComponent} from './home.component'
 
+import {DashboardComponent} from './Dashboard/dashboard.component'
+import {DashletComponent} from './Dashboard/dashlet.component'
+
 import {JobEnterComponent} from './Jobs/job-enter.component'
 import {JobDetailComponent} from './Jobs/job-detail.component'
 import {JobListComponent} from './Jobs/job-list.component'
@@ -37,6 +40,7 @@ import {ApiService} from './Shared/Services/api.service'
 import {JobService} from './Shared/Services/job.service'
 import {DataStore} from './Shared/Services/data.service';
 import {AuthService} from './Shared/Services/auth.service'
+import {UserService} from './Shared/Services/user.service'
 import {FullDatePipe} from './Shared/Pipes/fulldate.pipe'
 import {ShortDatePipe} from './Shared/Pipes/shortdate.pipe'
 import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
@@ -54,9 +58,9 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
           NgbModule.forRoot(),
           Ng2SimplePageScrollModule.forRoot(),
           RouterModule.forRoot([
-            { path: "dashboard", component: HomeComponent},
             { path: "jobs", component: JobAllComponentRoutable},
             { path: "myeurisko", component: CurrentUserDetailComponentRoutable},
+            { path: "dashboard", component: DashboardComponent},
             { path: "home", component: HomeComponent},
             { path: "jobview/:id", component: JobViewComponentRoutable},
             { path: "jobapply/:id", component: ApplicationEnterComponentRoutable},            
@@ -70,9 +74,10 @@ import {FromNowPipe} from './Shared/Pipes/fromnow.pipe'
                   ApplicationEnterComponent, ApplicationDetailComponent,ApplicationEnterComponentRoutable, ApplicationListComponent,
                   UserDetailComponent, CurrentUserDetailComponentRoutable,
                   Editor, EditorNumber, EditorDate, EditorBoolean, Checkbox, SelectorComponent, SimpleTinyComponent,EditorTinyMce,
-                  FullDatePipe, ShortDatePipe, FromNowPipe
+                  FullDatePipe, ShortDatePipe, FromNowPipe,
+                  DashboardComponent, DashletComponent
                  ],
-  providers:    [ ApiService, DataStore, AuthService, JobService],
+  providers:    [ ApiService, DataStore, AuthService, JobService, UserService],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

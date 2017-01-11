@@ -14,49 +14,55 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require('@angular/core');
 var data_service_1 = require('./data.service');
 var auth_service_1 = require('./auth.service');
+var user_service_1 = require('./user.service');
 var Rx_1 = require('rxjs/Rx');
 core_1.Injectable();
 var JobService = (function () {
-    function JobService(dataStore, authService) {
+    function JobService(dataStore, authService, userService) {
         this.dataStore = dataStore;
         this.authService = authService;
+        this.userService = userService;
     }
     // jobs
     // ======
-    JobService.prototype.createAnnotatedJob = function (job, users, responses) {
+    JobService.prototype.createAnnotatedJob = function (job, users, responses, dashlets) {
         var user = users.filter(function (user) { return user._id === job.userId; })[0];
         var myresponses = responses.filter(function (response) { return response.jobId === job._id; });
         var myUnreadResponses = myresponses.filter(function (response) { return !response.piFeedback; });
+        var dashlet = dashlets.filter(function (dashlet) { return dashlet.id === job._id; });
         return {
             data: job,
             annotation: {
                 user: user ? user.firstName + ' ' + user.name : 'unknown user',
                 nbResponses: myresponses.length,
-                nbUnreadResponses: myUnreadResponses.length
+                nbUnreadResponses: myUnreadResponses.length,
+                dashletId: dashlet.length > 0 ? dashlet[0]._id : undefined
             }
         };
     };
-    JobService.prototype.createAnnotatedResponse = function (response, requests) {
+    JobService.prototype.createAnnotatedResponse = function (response, requests, dashlets) {
         var request = requests.filter(function (request) { return request._id === response.jobId; })[0];
+        var dashlet = dashlets.filter(function (dashlet) { return dashlet.id === response._id; });
         return {
             data: response,
             annotation: {
                 jobTitle: request ? request.title : 'unknown job request',
                 candidateFullName: response.firstName + ' ' + response.name,
-                isUnread: !response.piFeedback
+                isUnread: !response.piFeedback,
+                dashletId: dashlet.length > 0 ? dashlet[0]._id : undefined
             }
         };
     };
     JobService.prototype.getAnnotatedJobs = function () {
         var _this = this;
-        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('job.request'), this.dataStore.getDataObservable('users.eurisko'), this.dataStore.getDataObservable('job.response'), function (jobs, users, responses) {
-            return jobs.map(function (job) { return _this.createAnnotatedJob(job, users, responses); });
+        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('job.request'), this.dataStore.getDataObservable('users.eurisko'), this.dataStore.getDataObservable('job.response'), this.userService.getJobDashletsForCurrentUser(), function (jobs, users, responses, dashlets) {
+            return jobs.map(function (job) { return _this.createAnnotatedJob(job, users, responses, dashlets); });
         });
     };
     JobService.prototype.getAnnotatedResponses = function () {
         var _this = this;
-        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('job.response'), this.dataStore.getDataObservable('job.request'), function (responses, requests) {
-            return responses.map(function (response) { return _this.createAnnotatedResponse(response, requests); });
+        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('job.response'), this.dataStore.getDataObservable('job.request'), this.userService.getApplicationDashletsForCurrentUser(), function (responses, requests, dashlets) {
+            return responses.map(function (response) { return _this.createAnnotatedResponse(response, requests, dashlets); });
         });
     };
     JobService.prototype.getAnnotatedJobsOfCurrentUser = function () {
@@ -73,10 +79,17 @@ var JobService = (function () {
     JobService.prototype.getAnnotatedResponsesByJobId = function (jobId) {
         return this.getAnnotatedResponses().map(function (responses) { return responses.filter(function (response) { return response.data.jobId === jobId; }); });
     };
+    JobService.prototype.getAnnotatedResponseById = function (responseId) {
+        return this.getAnnotatedResponses().map(function (responses) { return responses.filter(function (response) { return response.data._id === responseId; })[0]; });
+    };
+    JobService.prototype.getAnnotatedJobById = function (jobId) {
+        return this.getAnnotatedJobs().map(function (jobs) { return jobs.filter(function (job) { return job.data._id === jobId; })[0]; });
+    };
     JobService = __decorate([
         __param(0, core_1.Inject(data_service_1.DataStore)),
-        __param(1, core_1.Inject(auth_service_1.AuthService)), 
-        __metadata('design:paramtypes', [data_service_1.DataStore, auth_service_1.AuthService])
+        __param(1, core_1.Inject(auth_service_1.AuthService)),
+        __param(2, core_1.Inject(user_service_1.UserService)), 
+        __metadata('design:paramtypes', [data_service_1.DataStore, auth_service_1.AuthService, user_service_1.UserService])
     ], JobService);
     return JobService;
 }());

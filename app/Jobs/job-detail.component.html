@@ -28,6 +28,12 @@
 							{{job.annotation.nbUnreadResponses}}
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<img *ngIf="!job.annotation.dashletId" src="./images/pin.png" (click)="setDashlet()" />
+							<img *ngIf="job.annotation.dashletId" src="./images/unpin.png" (click)="removeDashlet(job.annotation.dashletId)" />
+						</div>
+					</div>										
 				</div>
 			</div>
 		</template>

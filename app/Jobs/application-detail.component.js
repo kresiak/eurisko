@@ -11,13 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var data_service_1 = require('./../Shared/Services/data.service');
 var job_service_1 = require('../Shared/Services/job.service');
+var user_service_1 = require('./../Shared/Services/user.service');
 var Rx_1 = require('rxjs/Rx');
 var forms_1 = require('@angular/forms');
 var ApplicationDetailComponent = (function () {
-    function ApplicationDetailComponent(dataStore, jobService, formBuilder) {
+    function ApplicationDetailComponent(dataStore, jobService, formBuilder, userService) {
         this.dataStore = dataStore;
         this.jobService = jobService;
         this.formBuilder = formBuilder;
+        this.userService = userService;
         this.isRoot = false;
         this.stateChanged = new core_1.EventEmitter();
     }
@@ -39,6 +41,13 @@ var ApplicationDetailComponent = (function () {
             _this.applicationViewForm.controls['piRemarque'].setValue(_this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.comment : '');
             _this.applicationViewForm.controls['piScore'].setValue(_this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.score : '');
         });
+    };
+    ApplicationDetailComponent.prototype.setDashlet = function () {
+        this.userService.createApplicationDashletForCurrentUser(this.application.data._id);
+    };
+    ApplicationDetailComponent.prototype.removeDashlet = function (dashletId) {
+        if (dashletId)
+            this.userService.removeDashletForCurrentUser(dashletId);
     };
     ApplicationDetailComponent.prototype.beforeTabChange = function ($event) {
         if ($event.nextId === 'tabMax') {
@@ -94,7 +103,7 @@ var ApplicationDetailComponent = (function () {
             selector: 'gg-application-detail',
             templateUrl: './application-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService, forms_1.FormBuilder, user_service_1.UserService])
     ], ApplicationDetailComponent);
     return ApplicationDetailComponent;
 }());

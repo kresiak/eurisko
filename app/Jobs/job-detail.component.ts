@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx'
 import { DataStore } from './../Shared/Services/data.service'
+import { UserService } from './../Shared/Services/user.service'
 import { JobService } from './../Shared/Services/job.service'
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from "moment"
@@ -15,7 +16,7 @@ import * as moment from "moment"
 )
 
 export class JobDetailComponent implements OnInit {
-    constructor(private dataStore: DataStore, private jobService: JobService) {
+    constructor(private dataStore: DataStore, private jobService: JobService, private userService: UserService) {
     }
 
     @Input() jobObservable: Observable<any>;
@@ -42,6 +43,15 @@ export class JobDetailComponent implements OnInit {
     //private model;
     private job
     private applicationsObservable: Observable<any>
+
+    setDashlet() {
+        this.userService.createJobDashletForCurrentUser(this.job.data._id);
+    }
+
+    removeDashlet(dashletId) {
+        if (dashletId)
+            this.userService.removeDashletForCurrentUser(dashletId);
+    }
 
     commentsUpdated(comments) {
         if (this.job && comments) {

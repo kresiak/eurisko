@@ -1,0 +1,11 @@
+<div *ngIf="dataObject" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+	<div class="card text-xs-center " [class.card-outline-success]="isJobDashlet()" [class.card-outline-warning]="isApplicationDashlet()" >
+		<div class="card-header">
+            {{getTitle()}}
+		</div>
+        <div class="card-block text-xs-left">
+            <gg-job-detail *ngIf="isJobDashlet()" [jobObservable]="dataObservable"></gg-job-detail>
+            <gg-application-detail *ngIf="isApplicationDashlet()" [applicationObservable]="dataObservable"></gg-application-detail>
+        </div>
+	</div>
+</div>

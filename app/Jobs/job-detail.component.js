@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Rx_1 = require('rxjs/Rx');
 var data_service_1 = require('./../Shared/Services/data.service');
+var user_service_1 = require('./../Shared/Services/user.service');
 var job_service_1 = require('./../Shared/Services/job.service');
 var JobDetailComponent = (function () {
-    function JobDetailComponent(dataStore, jobService) {
+    function JobDetailComponent(dataStore, jobService, userService) {
         this.dataStore = dataStore;
         this.jobService = jobService;
+        this.userService = userService;
         this.isRoot = false;
         this.stateChanged = new core_1.EventEmitter();
     }
@@ -34,6 +36,13 @@ var JobDetailComponent = (function () {
                 _this.applicationsObservable = _this.jobService.getAnnotatedResponsesByJobId(job.data._id);
             }
         });
+    };
+    JobDetailComponent.prototype.setDashlet = function () {
+        this.userService.createJobDashletForCurrentUser(this.job.data._id);
+    };
+    JobDetailComponent.prototype.removeDashlet = function (dashletId) {
+        if (dashletId)
+            this.userService.removeDashletForCurrentUser(dashletId);
     };
     JobDetailComponent.prototype.commentsUpdated = function (comments) {
         if (this.job && comments) {
@@ -108,7 +117,7 @@ var JobDetailComponent = (function () {
             selector: 'gg-job-detail',
             templateUrl: './job-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService])
+        __metadata('design:paramtypes', [data_service_1.DataStore, job_service_1.JobService, user_service_1.UserService])
     ], JobDetailComponent);
     return JobDetailComponent;
 }());
