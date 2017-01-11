@@ -22,7 +22,7 @@ var JobAllComponentRoutable = (function () {
     }
     JobAllComponentRoutable.prototype.ngOnInit = function () {
         var _this = this;
-        Rx_1.Observable.combineLatest(this.jobService.getAnnotatedJobs(), this.searchControl.valueChanges.startWith(''), function (jobs, searchTxt) {
+        Rx_1.Observable.combineLatest(this.jobService.getAnnotatedPublishedJobs(), this.searchControl.valueChanges.startWith(''), function (jobs, searchTxt) {
             if (searchTxt.trim() === '')
                 return jobs;
             return jobs.filter(function (job) { return job.data.title.toUpperCase().includes(searchTxt.toUpperCase()) || job.data.description.toUpperCase().includes(searchTxt.toUpperCase()); });

@@ -62,6 +62,9 @@ var JobService = (function () {
     JobService.prototype.getAnnotatedJobsByUserId = function (userId) {
         return this.getAnnotatedJobs().map(function (jobs) { return jobs.filter(function (job) { return job.data.userId === userId; }); });
     };
+    JobService.prototype.getAnnotatedPublishedJobs = function () {
+        return this.getAnnotatedJobs().map(function (jobs) { return jobs.filter(function (job) { return job.data.isPublished; }); });
+    };
     JobService.prototype.getAnnotatedResponsesByJobId = function (jobId) {
         return this.getAnnotatedResponses().map(function (responses) { return responses.filter(function (response) { return response.data.jobId === jobId; }); });
     };

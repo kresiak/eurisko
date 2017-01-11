@@ -48,7 +48,8 @@ export class JobEnterComponent implements OnInit {
             description: this.description,
             education: this.education,
             requirements: this.requirements,
-            procedure: this.procedure
+            procedure: this.procedure,
+            isPublished: false
         }).subscribe(res =>
         {
             var x=res;

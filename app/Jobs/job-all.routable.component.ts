@@ -24,7 +24,7 @@ export class JobAllComponentRoutable implements OnInit{
     searchForm;    
 
     ngOnInit():void{
-        Observable.combineLatest(this.jobService.getAnnotatedJobs(), this.searchControl.valueChanges.startWith(''), (jobs, searchTxt: string) => {
+        Observable.combineLatest(this.jobService.getAnnotatedPublishedJobs(), this.searchControl.valueChanges.startWith(''), (jobs, searchTxt: string) => {
             if (searchTxt.trim() === '') return jobs;
             return jobs.filter(job => job.data.title.toUpperCase().includes(searchTxt.toUpperCase()) || job.data.description.toUpperCase().includes(searchTxt.toUpperCase()));
         }).subscribe(jobs => this.jobs = jobs);        

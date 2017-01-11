@@ -11,6 +11,12 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-sm-2 vcenter">publication status:</div>
+						<div class="col-sm-9 vcenter" [style.color]="job.data.isPublished ? 'lightgreen' : 'red'">
+							{{job.data.isPublished ? 'published' : 'not published'}}
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-2 vcenter">number of responses received:</div>
 						<div class="col-sm-9 vcenter">
 							{{applications.length}}
@@ -40,6 +46,10 @@
                             <gg-editor [content]="job.data.title" [showControls]="true" (editSaved)="titleChanged($event)"></gg-editor>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-2 vcenter">is published:</div>
+						<div class="col-sm-9 vcenter"><gg-editor-boolean [content]="job.data.isPublished" (editSaved)="publishedUpdated($event)"></gg-editor-boolean></div>
+					</div>					
 					<div class="row">
 						<div class="col-sm-2 vcenter">description:</div>
 						<div class="col-sm-9 vcenter">

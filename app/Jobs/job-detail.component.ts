@@ -79,6 +79,11 @@ export class JobDetailComponent implements OnInit {
         this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
     }
 
+    private publishedUpdated(isPublished) {
+        this.job.data.isPublished = isPublished
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    }
+
     private descriptionChanged(description) {
         this.job.data.description = description
         this.dataStore.updateData('job.request', this.job.data._id, this.job.data);

@@ -65,6 +65,10 @@ var JobDetailComponent = (function () {
         this.job.data.title = title;
         this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
     };
+    JobDetailComponent.prototype.publishedUpdated = function (isPublished) {
+        this.job.data.isPublished = isPublished;
+        this.dataStore.updateData('job.request', this.job.data._id, this.job.data);
+    };
     JobDetailComponent.prototype.descriptionChanged = function (description) {
         this.job.data.description = description;
         this.dataStore.updateData('job.request', this.job.data._id, this.job.data);

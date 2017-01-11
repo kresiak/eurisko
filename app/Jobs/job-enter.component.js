@@ -34,7 +34,8 @@ var JobEnterComponent = (function () {
             description: this.description,
             education: this.education,
             requirements: this.requirements,
-            procedure: this.procedure
+            procedure: this.procedure,
+            isPublished: false
         }).subscribe(function (res) {
             var x = res;
             _this.reset();
