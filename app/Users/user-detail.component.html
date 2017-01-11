@@ -13,6 +13,24 @@
 							<gg-editor [content]="user.data.email" [showControls]="true" (editSaved)="emailUpdated($event)"></gg-editor>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-3 vcenter">number of published positions:</div>
+						<div class="col-sm-6 vcenter">
+							{{user.annotation.nbOfPublishedJobs}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 vcenter">total number of positions:</div>
+						<div class="col-sm-6 vcenter">
+							{{user.annotation.nbOfJobs}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 vcenter">number of unread applications:</div>
+						<div class="col-sm-6 vcenter" [style.color]="user.annotation.nbUnreadResponses === 0 ? 'green' : 'orange'">
+							{{user.annotation.nbUnreadResponses}}
+						</div>
+					</div>
 				</div>
 			</div>
 		</template>
@@ -22,7 +40,7 @@
 			<gg-comments [comments]="user.data.comments" (commentsUpdated)="commentsUpdated($event)"></gg-comments>
 		</template>
 	</ngb-tab>
-	<ngb-tab title="Positions" id="tabPositions" *ngIf="hasJobRequests">
+	<ngb-tab title="Positions" id="tabPositions" *ngIf="user.annotation.hasJobRequests">
 		<template ngbTabContent>
             <gg-job-list [jobsObservable]="annotatedJobsObservable" [state]="state"></gg-job-list>
 		</template>

@@ -12,22 +12,30 @@ export class AuthService {
 
     private currentUserIdObservable= new BehaviorSubject(this.currentUserId);
 
-    private createAnnotatedUser(user) {
+    private createAnnotatedUser(user, jobs, responses) {
         if (!user) return null;
+        let myJobs= jobs.filter(job => job.userId===user._id)
+        let myPublishedJobs= myJobs.filter(job => job.isPublished)
+        let myResponses= responses.filter(response => myJobs.map(job => job._id).includes(response.jobId))
+        let myUnreadResponses= myResponses.filter(response => ! response.piFeedback)
         return {
             data: user,
             annotation: {
-                fullName: user.firstName + ' ' +user.name
+                fullName: user.firstName + ' ' +user.name,
+                nbOfJobs: myJobs.length,
+                nbOfPublishedJobs: myPublishedJobs.length,
+                hasJobRequests: myJobs.length > 0,
+                nbUnreadResponses: myUnreadResponses.length
             }
         };
     }
 
     getAnnotatedUsers(): Observable<any> {
         return Observable.combineLatest(
-            this.dataStore.getDataObservable('users.eurisko'),
-            (users) =>
+            this.dataStore.getDataObservable('users.eurisko'), this.dataStore.getDataObservable('job.request'), this.dataStore.getDataObservable('job.response'),
+            (users, jobs, responses) =>
             {
-                return users.map(user => this.createAnnotatedUser(user));
+                return users.map(user => this.createAnnotatedUser(user, jobs, responses));
             });
     }
 

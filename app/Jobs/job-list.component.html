@@ -18,7 +18,10 @@
 				<ngb-panel [disabled]="true">
 					<template ngbPanelTitle>
 						<div class="row">
-							<div class="col-sm-12"><b>Job</b></div>
+							<div class="col-sm-7"><b>Position</b></div>
+                            <div class="col-sm-2"><b>Status</b></div>
+                            <div class="col-sm-1"><b>Responses</b></div>
+                            <div class="col-sm-1"><b>Unread</b></div>
 						</div>
 					</template>
 					<template ngbPanelContent>
@@ -27,7 +30,10 @@
 				<ngb-panel *ngFor="let job of jobs" [id]="job.data._id">
 					<template ngbPanelTitle>
 						<div class="row" id="{{job.data._id}}">
-							<div class="col-sm-12">{{job.data.title}}</div>
+							<div class="col-sm-7">{{job.data.title}}</div>
+                            <div class="col-sm-2" [style.color]="job.data.isPublished ? 'green' : 'red'">{{job.data.isPublished? 'Published': 'Invisible'}}</div>
+                            <div class="col-sm-1">{{job.annotation.nbResponses}}</div>
+                            <div class="col-sm-1">{{job.annotation.nbUnreadResponses}}</div>
 						</div>
 					</template>
 					<template ngbPanelContent>

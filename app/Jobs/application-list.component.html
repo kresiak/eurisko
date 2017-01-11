@@ -20,8 +20,9 @@
 						<div class="row">
 							<div class="col-sm-3"><b>Candidate</b></div>
 							<div class="col-sm-3"><b>Citizenship</b></div>
-							<div class="col-sm-3"><b>Age</b></div>
+							<div class="col-sm-2"><b>Age</b></div>
 							<div class="col-sm-3"><b>Presently</b></div>
+                            <div class="col-sm-1"><b>Unread</b></div>
 						</div>
 					</template>
 					<template ngbPanelContent>
@@ -32,8 +33,9 @@
 						<div class="row" id="{{application.data._id}}">
 							<div class="col-sm-3">{{application.annotation.candidateFullName}}</div>
                             <div class="col-sm-3">{{application.data.citizenship}}</div>                            
-                            <div class="col-sm-3">{{application.data.age}}</div>                            
+                            <div class="col-sm-2">{{application.data.age}}</div>                            
                             <div class="col-sm-3">{{application.data.presentOccupation}}</div>                                                                                    
+                            <div class="col-sm-1">{{application.annotation.isUnread? '*': ''}}</div>
 						</div>
 					</template>
 					<template ngbPanelContent>

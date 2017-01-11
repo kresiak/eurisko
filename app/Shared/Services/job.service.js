@@ -23,12 +23,16 @@ var JobService = (function () {
     }
     // jobs
     // ======
-    JobService.prototype.createAnnotatedJob = function (job, users) {
+    JobService.prototype.createAnnotatedJob = function (job, users, responses) {
         var user = users.filter(function (user) { return user._id === job.userId; })[0];
+        var myresponses = responses.filter(function (response) { return response.jobId === job._id; });
+        var myUnreadResponses = myresponses.filter(function (response) { return !response.piFeedback; });
         return {
             data: job,
             annotation: {
-                user: user ? user.firstName + ' ' + user.name : 'unknown user'
+                user: user ? user.firstName + ' ' + user.name : 'unknown user',
+                nbResponses: myresponses.length,
+                nbUnreadResponses: myUnreadResponses.length
             }
         };
     };
@@ -38,14 +42,15 @@ var JobService = (function () {
             data: response,
             annotation: {
                 jobTitle: request ? request.title : 'unknown job request',
-                candidateFullName: response.firstName + ' ' + response.name
+                candidateFullName: response.firstName + ' ' + response.name,
+                isUnread: !response.piFeedback
             }
         };
     };
     JobService.prototype.getAnnotatedJobs = function () {
         var _this = this;
-        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('job.request'), this.dataStore.getDataObservable('users.eurisko'), function (jobs, users) {
-            return jobs.map(function (job) { return _this.createAnnotatedJob(job, users); });
+        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('job.request'), this.dataStore.getDataObservable('users.eurisko'), this.dataStore.getDataObservable('job.response'), function (jobs, users, responses) {
+            return jobs.map(function (job) { return _this.createAnnotatedJob(job, users, responses); });
         });
     };
     JobService.prototype.getAnnotatedResponses = function () {

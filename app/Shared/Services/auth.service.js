@@ -20,20 +20,28 @@ var AuthService = (function () {
         this.currentUserId = '5865621996b3bd2c99c54948';
         this.currentUserIdObservable = new Rx_1.BehaviorSubject(this.currentUserId);
     }
-    AuthService.prototype.createAnnotatedUser = function (user) {
+    AuthService.prototype.createAnnotatedUser = function (user, jobs, responses) {
         if (!user)
             return null;
+        var myJobs = jobs.filter(function (job) { return job.userId === user._id; });
+        var myPublishedJobs = myJobs.filter(function (job) { return job.isPublished; });
+        var myResponses = responses.filter(function (response) { return myJobs.map(function (job) { return job._id; }).includes(response.jobId); });
+        var myUnreadResponses = myResponses.filter(function (response) { return !response.piFeedback; });
         return {
             data: user,
             annotation: {
-                fullName: user.firstName + ' ' + user.name
+                fullName: user.firstName + ' ' + user.name,
+                nbOfJobs: myJobs.length,
+                nbOfPublishedJobs: myPublishedJobs.length,
+                hasJobRequests: myJobs.length > 0,
+                nbUnreadResponses: myUnreadResponses.length
             }
         };
     };
     AuthService.prototype.getAnnotatedUsers = function () {
         var _this = this;
-        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('users.eurisko'), function (users) {
-            return users.map(function (user) { return _this.createAnnotatedUser(user); });
+        return Rx_1.Observable.combineLatest(this.dataStore.getDataObservable('users.eurisko'), this.dataStore.getDataObservable('job.request'), this.dataStore.getDataObservable('job.response'), function (users, jobs, responses) {
+            return users.map(function (user) { return _this.createAnnotatedUser(user, jobs, responses); });
         });
     };
     AuthService.prototype.getAnnotatedCurrentUser = function () {

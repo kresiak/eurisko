@@ -12,12 +12,16 @@ export class JobService {
     // jobs
     // ======
 
-    private createAnnotatedJob(job, users) {
+    private createAnnotatedJob(job, users, responses) {
         let user= users.filter(user => user._id === job.userId)[0]
+        let myresponses= responses.filter(response => response.jobId===job._id)
+        let myUnreadResponses= myresponses.filter(response => !response.piFeedback)
         return {
             data: job,
             annotation: {
-                user: user ? user.firstName + ' ' + user.name : 'unknown user'
+                user: user ? user.firstName + ' ' + user.name : 'unknown user',
+                nbResponses: myresponses.length,
+                nbUnreadResponses: myUnreadResponses.length
             }
         }
     }
@@ -28,7 +32,8 @@ export class JobService {
             data: response,
             annotation: {
                 jobTitle: request ? request.title : 'unknown job request',
-                candidateFullName: response.firstName + ' ' + response.name 
+                candidateFullName: response.firstName + ' ' + response.name,
+                isUnread: !response.piFeedback 
             }
         }
     }
@@ -37,8 +42,9 @@ export class JobService {
         return Observable.combineLatest(
             this.dataStore.getDataObservable('job.request'),
             this.dataStore.getDataObservable('users.eurisko'),
-            (jobs, users) => {
-                return jobs.map(job => this.createAnnotatedJob(job, users))
+            this.dataStore.getDataObservable('job.response'),
+            (jobs, users, responses) => {
+                return jobs.map(job => this.createAnnotatedJob(job, users, responses))
             });        
     }
 
