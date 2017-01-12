@@ -31,13 +31,13 @@ var ApplicationDetailComponent = (function () {
         var _this = this;
         this.stateInit();
         this.applicationViewForm = this.formBuilder.group({
-            piScore: ['', [forms_1.Validators.required]],
+            // piScore: ['', [Validators.required]],
             piRemarque: ['', [forms_1.Validators.required]]
         });
         this.applicationObservable.subscribe(function (application) {
             _this.application = application;
             _this.applicationViewForm.controls['piRemarque'].setValue(_this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.comment : '');
-            _this.applicationViewForm.controls['piScore'].setValue(_this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.score : '');
+            // this.applicationViewForm.controls['piScore'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.score : '')
         });
     };
     ApplicationDetailComponent.prototype.beforeTabChange = function ($event) {
@@ -59,7 +59,7 @@ var ApplicationDetailComponent = (function () {
     };
     ApplicationDetailComponent.prototype.save = function (formValue, isValid) {
         this.application.data.piFeedback = {
-            score: formValue.piScore,
+            score: this.currentRate,
             comment: formValue.piRemarque
         };
         this.dataStore.updateData('job.response', this.application.data._id, this.application.data);
@@ -99,4 +99,17 @@ var ApplicationDetailComponent = (function () {
     return ApplicationDetailComponent;
 }());
 exports.ApplicationDetailComponent = ApplicationDetailComponent;
+var NgbdRatingBasic = (function () {
+    function NgbdRatingBasic() {
+        this.currentRate = 8;
+    }
+    NgbdRatingBasic = __decorate([
+        core_1.Component({
+            selector: 'ngbd-rating-basic',
+        }), 
+        __metadata('design:paramtypes', [])
+    ], NgbdRatingBasic);
+    return NgbdRatingBasic;
+}());
+exports.NgbdRatingBasic = NgbdRatingBasic;
 //# sourceMappingURL=application-detail.component.js.map
