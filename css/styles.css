@@ -20,7 +20,8 @@
 
 .row
 {
-    margin: 3px
+    margin: 3px;
+    margin-bottom: 10px; 
 }
 
 /*   x-chartist {
