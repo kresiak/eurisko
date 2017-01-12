@@ -26,8 +26,9 @@ export class ApplicationDetailComponent implements OnInit {
     @Input() isRoot: boolean = false
     @Output() stateChanged = new EventEmitter()
     @Input() responseId: string;
-    //   private response: any;
+    
     private application: any;
+    private currentRate: any;
 
     private stateInit() {
         if (!this.state) this.state = {};
@@ -38,14 +39,14 @@ export class ApplicationDetailComponent implements OnInit {
         this.stateInit()
 
         this.applicationViewForm = this.formBuilder.group({
-            piScore: ['', [Validators.required]],
+           // piScore: ['', [Validators.required]],
             piRemarque: ['', [Validators.required]]
         })
 
         this.applicationObservable.subscribe(application => {
             this.application = application;
             this.applicationViewForm.controls['piRemarque'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.comment : '')
-            this.applicationViewForm.controls['piScore'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.score : '')
+           // this.applicationViewForm.controls['piScore'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.score : '')
         });
       
     }
@@ -82,10 +83,17 @@ export class ApplicationDetailComponent implements OnInit {
 
     save(formValue, isValid) {
         this.application.data.piFeedback = {
-            score: formValue.piScore,
+            score: this.currentRate,
             comment: formValue.piRemarque
         }
 
         this.dataStore.updateData('job.response', this.application.data._id, this.application.data)
     }
 }
+
+    @Component({
+        selector: 'ngbd-rating-basic',
+    })
+    export class NgbdRatingBasic {
+        currentRate = 8;
+    }
