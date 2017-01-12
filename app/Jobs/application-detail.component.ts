@@ -46,6 +46,7 @@ export class ApplicationDetailComponent implements OnInit {
         this.applicationObservable.subscribe(application => {
             this.application = application;
             this.applicationViewForm.controls['piRemarque'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.comment : '')
+            this.currentRate= this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.score : 0
            // this.applicationViewForm.controls['piScore'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.score : '')
         });
       

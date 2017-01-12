@@ -39,6 +39,7 @@ var ApplicationDetailComponent = (function () {
         this.applicationObservable.subscribe(function (application) {
             _this.application = application;
             _this.applicationViewForm.controls['piRemarque'].setValue(_this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.comment : '');
+            _this.currentRate = _this.application && _this.application.data && _this.application.data.piFeedback ? _this.application.data.piFeedback.score : 0;
             // this.applicationViewForm.controls['piScore'].setValue(this.application && this.application.data && this.application.data.piFeedback ? this.application.data.piFeedback.score : '')
         });
     };
