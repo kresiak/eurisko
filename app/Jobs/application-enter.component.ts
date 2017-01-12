@@ -56,7 +56,8 @@ export class ApplicationEnterComponent implements OnInit {
             countryOfResidence: ['', [Validators.required]],
             education: ['', [Validators.required]],
             publications: ['', [Validators.required]],
-            presentOccupation: ['', [Validators.required]]
+            presentOccupation: ['', [Validators.required]],
+            motivation: ['', [Validators.required]]
         });
     }
     
@@ -74,7 +75,8 @@ export class ApplicationEnterComponent implements OnInit {
             countryOfResidence: formValue.countryOfResidence,
             education: formValue.education,
             publications: formValue.publications,
-            presentOccupation: formValue.presentOccupation
+            presentOccupation: formValue.presentOccupation,
+            motivation: formValue.motivation
         }).subscribe(res =>
         {
             let link = ['/jobview', this.jobId];
