@@ -21,7 +21,9 @@
 .row
 {
     margin: 3px;
-    margin-bottom: 10px; 
+}
+.addPosition {
+    margin-bottom: 20px; 
 }
 
 /*   x-chartist {

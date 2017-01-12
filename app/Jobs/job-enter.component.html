@@ -3,31 +3,31 @@
 
         <div class="container-fluid">
             <form [formGroup]="jobForm" (ngSubmit)="save(jobForm.value, jobForm.valid)">
-                <div class="form-group row">
+                <div class="form-group row addPosition">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Title:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" formControlName="title"  placeholder="enter title of position">
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row addPosition">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Background:</label>
                     <div class="col-sm-10">
                         <simple-tiny #descriptionChild [elementId]="'description'" (onEditorKeyup)="descriptionChanged($event)" ></simple-tiny> 
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row addPosition">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Required education:</label>
                     <div class="col-sm-10">
                         <simple-tiny #educationChild [elementId]="'education'" (onEditorKeyup)="educationChanged($event)" ></simple-tiny> 
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row addPosition">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Requirements:</label>
                     <div class="col-sm-10">
                         <simple-tiny #requirementsChild [elementId]="'requirements'" (onEditorKeyup)="requirementsChanged($event)" ></simple-tiny> 
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row addPosition">
                     <label for="description" class="col-sm-2 col-form-label col-xl-2">Application:</label>
                     <div class="col-sm-10">
                         <simple-tiny #procedureChild [elementId]="'procedure'" (onEditorKeyup)="procedureChanged($event)" ></simple-tiny> 
