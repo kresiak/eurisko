@@ -53,7 +53,8 @@ var ApplicationEnterComponent = (function () {
             countryOfResidence: ['', [forms_1.Validators.required]],
             education: ['', [forms_1.Validators.required]],
             publications: ['', [forms_1.Validators.required]],
-            presentOccupation: ['', [forms_1.Validators.required]]
+            presentOccupation: ['', [forms_1.Validators.required]],
+            motivation: ['', [forms_1.Validators.required]]
         });
     };
     ApplicationEnterComponent.prototype.save = function (formValue, isValid) {
@@ -70,7 +71,8 @@ var ApplicationEnterComponent = (function () {
             countryOfResidence: formValue.countryOfResidence,
             education: formValue.education,
             publications: formValue.publications,
-            presentOccupation: formValue.presentOccupation
+            presentOccupation: formValue.presentOccupation,
+            motivation: formValue.motivation
         }).subscribe(function (res) {
             var link = ['/jobview', _this.jobId];
             _this.router.navigate(link);
